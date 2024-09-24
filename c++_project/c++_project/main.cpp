@@ -1,5 +1,6 @@
 #include <iostream>
 #include <windows.h>
+#include "Input.h"
 using namespace std;
 
 /*
@@ -14,20 +15,26 @@ using namespace std;
 - 핵심적인 기능만 노출
 */
 
-
-
+POINT p;
 int main()
 {
-    // 콘솔 이름 변경
-    SetConsoleTitle(TEXT("abcde"));
+    //// 콘솔 이름 변경
+    //SetConsoleTitle(TEXT("abcde"));
 
-    system("mode con:cols=150 lines=50");
+    //system("mode con:cols=150 lines=50");
 
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 18);
-    cout << "press any key" << endl;
-    system("pause");
-
-
-
-    return 0;
+    //SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 18);
+    //cout << "press any key" << endl;
+    //system("pause");
+    
+    while (true)
+    {
+        //InputManager::Input::Initialize();
+        //InputManager::Input::Update();
+        if (GetCursorPos(&p))
+        {
+            cout << p.x << "," << p.y << endl;
+            Sleep(50);
+        }
+    }
 }

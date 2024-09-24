@@ -25,7 +25,7 @@ void InputTest()
 			cout << "click up" << endl;
 			break;
 		case 's':
-			dir = DOWN;
+			dir = DOWN;	
 			cout << "click down" << endl;
 			break;
 			/*case 'x':
@@ -79,19 +79,10 @@ void printmap(int arr[][50])
 	}
 }
 
-
-
 int main()
 {
-
-	
-
-
 	//int x = 0;
 	//int y = 0;
-
-
-	//
 	printmap(arr);
 
 	//while (true) {
