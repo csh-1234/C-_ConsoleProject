@@ -9,11 +9,13 @@
   <ItemGroup>
     <ClCompile Include="20240923_과제.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="소스.cpp" />
     <ClCompile Include="소스1.cpp" />
+    <ClCompile Include="Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Input.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Manager.h" />
   </ItemGroup>
 </Project>

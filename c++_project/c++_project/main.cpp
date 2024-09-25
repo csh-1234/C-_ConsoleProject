@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
-#include "Input.h"
+#include "Manager.h"
+#include "InputManager.h"
 using namespace std;
 
 /*
@@ -15,7 +16,6 @@ using namespace std;
 - 핵심적인 기능만 노출
 */
 
-POINT p;
 int main()
 {
     //// 콘솔 이름 변경
@@ -31,10 +31,8 @@ int main()
     {
         //InputManager::Input::Initialize();
         //InputManager::Input::Update();
-        if (GetCursorPos(&p))
-        {
-            cout << p.x << "," << p.y << endl;
-            Sleep(50);
-        }
+        Manager& managers = Manager::getInstance();
+        Manager::getInputManager().Initialize;
+        Manager::getInputManager().Update;
     }
 }
