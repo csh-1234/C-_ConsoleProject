@@ -13,6 +13,9 @@
     <ClCompile Include="소스.cpp" />
     <ClCompile Include="소스1.cpp" />
     <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="소스2.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputManager.h" />
