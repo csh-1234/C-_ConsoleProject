@@ -21,23 +21,31 @@ enum class eKeyCode
 class InputManager
 {
 public:
+	static InputManager& getInstance() { static InputManager input; return input; }
+
 	struct Key
 		{
 			eKeyCode keyCode;
 			eKeyState state;
 			bool isPressed;
 		};
+
+	static std::vector<Key>Keys; // 키보드 키들을 맵핑해놓을 벡터
+	static void allocateKeys();  // eKeyCode에 작성한 키들을 <vector>keys에 당
+	static void updateKeys();	 // while을 돌면서 키의 변경 감지
+
 	static void Initialize();
 	static void Update();
 
-	static bool GetKeyDown(eKeyCode code) { return Keys[(int)code].state== eKeyState::Down; }
+	static bool GetKeyDown(eKeyCode code) { return Keys[(int)code].state == eKeyState::Down; }
 	static bool GetKeyUp(eKeyCode code) { return Keys[(int)code].state == eKeyState::Up; }
 	static bool GetKey(eKeyCode code) { return Keys[(int)code].state == eKeyState::Pressed; }
 
 private:
-	static std::vector<Key>Keys; // 키보드 키들을 맵핑해놓을 벡터
-	static void allocateKeys();  // eKeyCode에 작성한 키들을 <vector>keys에 당
-	static void updateKeys();	 // while을 돌면서 키의 변경 감지
+	InputManager() {};
+	~InputManager() {};
+	InputManager(const InputManager&) = delete;
+	InputManager& operator=(const InputManager&) = delete;
 };
 
 

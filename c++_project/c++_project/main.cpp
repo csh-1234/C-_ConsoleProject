@@ -2,6 +2,7 @@
 #include <windows.h>
 #include "Manager.h"
 #include "InputManager.h"
+#include "TimeManager.h"
 #include <conio.h>  // _getch() 사용
 
 using namespace std;
@@ -102,11 +103,99 @@ void CursorView()
 }
 int main()
 {
-    char input;
-    CursorView();
-    //drawToBuffer();
+    //char input;
+    //CursorView();
+    ////drawToBuffer();
+    /*LARGE_INTEGER CpuFrequency = {};
+    LARGE_INTEGER PrevFrequency = {};
+    LARGE_INTEGER CurrentFrequency = {};
+    float DiffereneceFrequency = {};
+    float DeltaTimeValue = 0.0f;
+    QueryPerformanceFrequency(&CpuFrequency);
+    QueryPerformanceCounter(&PrevFrequency);
+    float time = 0.0f;*/
 
-    drawMap();
+    while (true)
+    {
+        //QueryPerformanceCounter(&CurrentFrequency);
+        //DiffereneceFrequency = static_cast<float>(CurrentFrequency.QuadPart - PrevFrequency.QuadPart);
+        //DeltaTimeValue = DiffereneceFrequency / static_cast<float>(CpuFrequency.QuadPart);
+        ////cout << DeltaTimeValue << endl;
+        //PrevFrequency.QuadPart = CurrentFrequency.QuadPart;
+
+        //time += DeltaTimeValue;
+        //float fps = 0.1f / DeltaTimeValue;
+
+        //cout << fps << endl;
+
+
+        // 
+        // 
+        //PrevFrequency.QuadPart = CurrentFrequency.QuadPart;
+        //cout << CpuFrequency.QuadPart << endl;
+        //cout << PrevFrequency.QuadPart << endl;
+        //cout << DeltaTimeValue << endl;
+        
+
+        //Manager& manager = Manager::getInstance();
+        //manager.input.Initialize();
+        //manager.input.Update();
+        //if (manager.input.GetKey(eKeyCode::A))
+        //{
+        //    cout << 1 << endl;
+        //}
+        
+        /*if (manager.input.GetKey(eKeyCode::A))
+        {
+            cout << 1 << endl;
+        }*/
+
+      
+
+
+        /*InputManager& input = InputManager::getInstance();
+        input.*/
+
+
+     /*   InputManager& input = InputManager::getInstance();
+        input.Initialize();
+        input.Update();
+
+        if (input.GetKey(eKeyCode::A))
+        {
+            cout << 1 << endl;
+        }*/
+       /* Manager& managers = Manager::getInstance();
+        managers.getInputManager()->Initialize();
+        managers.getInputManager()->Update();
+
+        Manager& managers2 = Manager::getInstance();
+        managers2.getInputManager()->Initialize();
+        managers2.getInputManager()->Update();
+
+        InputManager* inputmanager3 = new InputManager();
+        inputmanager3->Initialize();
+        inputmanager3->Update();
+
+
+        if(managers.getInputManager()->GetKey(eKeyCode::A))
+        {
+            cout << 1 << endl;
+        }*/
+
+        /*managers.getInputManager().Initialize;
+        managers.getInputManager().Update;*/
+     
+        
+        
+        /*if (managers.getInputManager().GetKey(eKeyCode::A))
+        {
+            cout << 1 << endl;
+        }*/
+    }
+    
+
+    //drawMap();
     //while (true) {  
     //    // 화면을 그릴 버퍼에 맵과 플레이어 정보를 저장
     //    drawToBuffer();
