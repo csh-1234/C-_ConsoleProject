@@ -16,3 +16,5 @@ protected:
 	CharacterClass _characterClass;
 };
 
+
+

@@ -11,6 +11,15 @@
     <Filter Include="Creature">
       <UniqueIdentifier>{2276fd07-5139-45ed-a1bd-8c6a341e45c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Creature\Player">
+      <UniqueIdentifier>{38c346cd-4208-41d1-bfb6-d6d5c1bb3f83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Creature\Monster">
+      <UniqueIdentifier>{6fa65daf-c999-45b1-bd0b-3b940473803e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skill">
+      <UniqueIdentifier>{8f091ea0-71a7-4999-9bb8-a51b714ad7f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="20240923_과제.cpp" />
@@ -31,9 +40,17 @@
     <ClCompile Include="Creature.cpp">
       <Filter>Creature</Filter>
     </ClCompile>
+    <ClCompile Include="소스3.cpp" />
     <ClCompile Include="Player.cpp">
-      <Filter>Creature</Filter>
+      <Filter>Creature\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Knight.cpp">
+      <Filter>Creature\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="소스4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -51,9 +68,15 @@
     <ClInclude Include="Creature.h">
       <Filter>Creature</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Creature</Filter>
-    </ClInclude>
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="Player.h">
+      <Filter>Creature\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Knight.h">
+      <Filter>Creature\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>Skill</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
