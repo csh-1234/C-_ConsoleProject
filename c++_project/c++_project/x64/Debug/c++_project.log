@@ -1,2 +1,3 @@
-﻿  소스4.cpp
+﻿  maptest2.cpp
+C:\Users\KGA\Desktop\C-_ConsoleProject\c++_project\c++_project\maptest2.cpp(248,9): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
   c++_project.vcxproj -> C:\Users\KGA\Desktop\C-_ConsoleProject\c++_project\x64\Debug\c++_project.exe

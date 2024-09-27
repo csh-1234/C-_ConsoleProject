@@ -40,8 +40,6 @@ void InputManager::updateKeys()
 		{
 			if (key.isPressed == true)
 			{
-
-				std::cout << (int)key.keyCode << std::endl;
 				key.state = eKeyState::Pressed;
 			}
 			else

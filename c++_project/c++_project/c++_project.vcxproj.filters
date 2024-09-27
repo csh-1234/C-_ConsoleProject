@@ -24,10 +24,7 @@
   <ItemGroup>
     <ClCompile Include="20240923_과제.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="소스.cpp" />
-    <ClCompile Include="소스1.cpp" />
     <ClCompile Include="Manager.cpp" />
-    <ClCompile Include="소스2.cpp" />
     <ClCompile Include="GameManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -51,6 +48,10 @@
       <Filter>Skill</Filter>
     </ClCompile>
     <ClCompile Include="소스4.cpp" />
+    <ClCompile Include="mpatest.cpp" />
+    <ClCompile Include="소스5.cpp" />
+    <ClCompile Include="소스6.cpp" />
+    <ClCompile Include="maptest2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
