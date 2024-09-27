@@ -1,3 +1,8 @@
-﻿  maptest2.cpp
-C:\Users\KGA\Desktop\C-_ConsoleProject\c++_project\c++_project\maptest2.cpp(248,9): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+﻿  GameManager.cpp
+  Manager.cpp
+  Map.cpp
+  소스.cpp
+C:\Users\KGA\Desktop\C-_ConsoleProject\c++_project\c++_project\소스.cpp(310,31): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\KGA\Desktop\C-_ConsoleProject\c++_project\c++_project\소스.cpp(310,29): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
   c++_project.vcxproj -> C:\Users\KGA\Desktop\C-_ConsoleProject\c++_project\x64\Debug\c++_project.exe

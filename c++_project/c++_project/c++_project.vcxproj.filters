@@ -20,11 +20,12 @@
     <Filter Include="Skill">
       <UniqueIdentifier>{8f091ea0-71a7-4999-9bb8-a51b714ad7f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{c2436f51-cc6c-47e2-99e8-08c3ba7f3acd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="20240923_과제.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Manager.cpp" />
     <ClCompile Include="GameManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -52,6 +53,13 @@
     <ClCompile Include="소스5.cpp" />
     <ClCompile Include="소스6.cpp" />
     <ClCompile Include="maptest2.cpp" />
+    <ClCompile Include="Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="소스.cpp" />
+    <ClCompile Include="Manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -78,6 +86,9 @@
     </ClInclude>
     <ClInclude Include="Skill.h">
       <Filter>Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

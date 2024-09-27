@@ -1,5 +1,6 @@
 #pragma once
 #include "InputManager.h"
+#include "GameManager.h"
 #include <iostream>
 class Manager {
 public:
@@ -7,7 +8,7 @@ public:
     ~Manager() {}
 
     InputManager& input = InputManager::getInstance();
-
+    GameManager& game = GameManager::getInstance();
 
     static Manager& getInstance() 
     {
