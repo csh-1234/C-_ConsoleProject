@@ -4,7 +4,7 @@ using namespace std;
 
 Creature::Creature(int unitType) :
 	_name(""), _unitType(unitType), _maxHp(0), _hp(0), _maxMp(0), _mp(0), _atk(0), _def(0), _criRate(0),
-	_criDamage(0), _avoidRate(0), _speed(0), _money(0) {}
+	_criDamage(0), _avoidRate(0), _speed(0), _money(0), _posX(1), _posY(1) {}
 Creature::~Creature() {}
 
 #pragma region Property
@@ -104,6 +104,23 @@ void Creature::SetMoney(int inputMoney)
 {
 	_money = inputMoney;
 }
+int Creature::GetPosX() const
+{
+	return _posX;
+}
+void Creature::SetPosX(int inputPosX)
+{
+	_posX = inputPosX;
+}
+int Creature::GetPosY() const
+{
+	return _posY;
+}
+void Creature::SetPosY(int inputPosY)
+{
+	_posY = inputPosY;
+}
+
 #pragma endregion
 
 void Creature::PrintUnit()

@@ -23,6 +23,43 @@ enum class EGameObject
     PORTAL = 9 ,
 };
 
+class ConsoleBuffer {
+private:
+    std::vector<std::vector<wchar_t>> buffer;  // 와이드 문자열 사용
+    int width, height;
+    HANDLE hConsole;
+
+public:
+    ConsoleBuffer(int w, int h) : width(w), height(h), buffer(h, std::vector<wchar_t>(w, L' ')) {
+        hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleScreenBufferSize(hConsole, { (SHORT)w, (SHORT)h });
+    }
+
+    void Clear() {
+        for (auto& row : buffer) {
+            std::fill(row.begin(), row.end(), L' ');  // 와이드 공백 사용
+        }
+    }
+
+    void DrawAt(int x, int y, const std::wstring& str) {  // 와이드 문자열 사용
+        for (size_t i = 0; i < str.length() && x + i < width; ++i) {
+            if (y >= 0 && y < height && x + i >= 0) {
+                buffer[y][x + i] = str[i];
+            }
+        }
+    }
+
+    void Render() {
+        COORD topLeft = { 0, 0 };
+        DWORD written;
+
+        for (const auto& row : buffer) {
+            WriteConsoleOutputCharacterW(hConsole, row.data(), width, topLeft, &written);  // 유니코드 버전 사용
+            topLeft.Y++;
+        }
+    }
+};
+
 const int MAP_WIDTH = 50;
 const int MAP_HEIGHT = 50;
 
@@ -31,9 +68,6 @@ const int VIEWPORT_HEIGHT = 10; // 화면에 표시되는 높이
 
 Knight* player = new Knight("홍길동");
 Monster* monster;
-
-//Monster* monster = new
-
 int playerX = player->GetPosX();
 int playerY = player->GetPosY();
 
@@ -42,6 +76,37 @@ int buffer2[50][50] = {};
 
 const int ViewSizeX = 100; // 18 12
 const int ViewSizeY = 100;
+
+void DrawMessageBox(ConsoleBuffer& buffer, const std::wstring& message) {
+    buffer.DrawAt(4, 35, L"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+    for (int i = 36; i < 47; ++i) {
+        buffer.DrawAt(4, i, L"┃                                                                                         ┃");
+    }
+    buffer.DrawAt(4, 47, L"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+    buffer.DrawAt(16, 41, message);
+}
+void DrawBattleUI(ConsoleBuffer& buffer) {
+    buffer.DrawAt(30, 10, L"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+    for (int i = 11; i < 29; ++i) {
+        buffer.DrawAt(30, i, L"┃                                     ┃");
+    }
+    buffer.DrawAt(30, 29, L"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+    //buffer.DrawAt(13, 32, L"행동 선택");
+    //buffer.DrawAt(6, 34, L" ━━━━━━━━━━━━━━━━━━━━ ");
+    //buffer.DrawAt(10, 36, L"공격");  // 그냥 공격
+    //buffer.DrawAt(10, 38, L"스킬");  // 스킬 리스트를 뿌려주고 입력 받아야 할듯
+    //buffer.DrawAt(10, 40, L"인벤토리"); // 아이템 리스트를 뿌려주고 입력 받아야 할듯
+    //buffer.DrawAt(10, 42, L"도망치기");
+
+    buffer.DrawAt(5, 30, L"┏━━━━━━━━━━━━━━━━━━━━━━┓");
+    for (int i = 31; i < 45; ++i) {
+        buffer.DrawAt(5, i, L"┃                      ┃");
+    }
+    buffer.DrawAt(5, 45, L"┗━━━━━━━━━━━━━━━━━━━━━━┛");
+}
+
 
 vector<string> backBuffer(50, string(100, ' ')); // 50줄, 한 줄에 100개의 공백
 void drawToBuffer(int x, int y, const std::string& text) {
@@ -96,7 +161,8 @@ void printRightUI();
 void PrintKeyboardState();
 void PrintMessage();
 void printUserInfo();
-void clearScreen();
+void clearScreen(); 
+void gotoxy(int x, int y);
 
 void DrawBuffer2(Map* currentMap)
 {
@@ -197,15 +263,61 @@ void MovePlayer(Map* currentMap)
     case (int)EGameObject::MONSTER:
     {
         monster = new Monster(MonsterType::SLIME);
-        while (true)
+        ConsoleBuffer buffer(100, 50);  // 콘솔 크기를 설정했습니다
+
+        bool showBattleUI = true;
+        bool showMessage = false;
+        std::wstring currentMessage = L"";
+
+        bool bKeyDown = false; // 'B' 키 입력 상태
+        bool mKeyDown = false; // 'M' 키 입력 상태
+
+        while (true) 
         {
+#pragma region MyRegion
+
+
+
+            //buffer.Clear();
+
+            //DrawBattleUI(buffer);
+            ////DrawMessageBox(buffer, currentMessage);
+
+            //buffer.Render();
+
+            ////// 사용자 입력 처리
+            ////if (GetAsyncKeyState('B') & 0x8000) {
+            ////    if (!bKeyDown) {
+            ////        showBattleUI = !showBattleUI;
+            ////        bKeyDown = true;  // 키가 눌렸음을 기록
+            ////    }
+            ////}
+            ////else {
+            ////    bKeyDown = false; // 키가 떼어졌을 때 상태 초기화
+            ////}
+
+            ////if (GetAsyncKeyState('M') & 0x8000) {
+            ////    if (!mKeyDown) {
+            ////        showMessage = !showMessage;
+            ////        //if (showMessage) {
+            ////        //    currentMessage = L"아이템을(를) 획득하셨습니다.";  // 유니코드 문자열로 변경
+            ////        //}
+            ////        mKeyDown = true;  // 키가 눌렸음을 기록
+            ////    }
+            ////}
+            ////else {
+            ////    mKeyDown = false;  // 키가 떼어졌을 때 상태 초기화
+            ////}
+
+            ////Sleep(100);  // CPU 사용량 감소를 위한 짧은 대기 시간
+            //if (GetAsyncKeyState('M') & 0x8000)
+            //{
+            //    break;
+            //}
+#pragma endregion
             clearScreen();
-            //printUserInfo();
-            //PrintKeyboardState();
-            //PrintMessage();
-            //PrintBattleUI();
-            //PrintBattleUI2();
-            
+            manager.input.Update();
+            PrintBattleUI();
         }
         break;
     }
@@ -479,8 +591,8 @@ void PrintBattleUI()
     std::cout << "행동 선택";
     gotoxy(6, 34);
     std::cout << " ━━━━━━━━━━━━━━━━━━━━ ";
-    gotoxy(10, 36);
-    std::cout << "공격";
+    gotoxy(8, 36);
+    std::cout << "▶공격";
     gotoxy(10, 38);
     std::cout << "스킬";
     gotoxy(10, 40);
@@ -516,7 +628,6 @@ void PrintBattleUI2()
     std::cout << "┗━━━━━━━━━━━━━━━━━━━━━━┛";
 }
 
-// 몬스터가 있다 -> 싸움시 동적할당?
 
 
 int main()

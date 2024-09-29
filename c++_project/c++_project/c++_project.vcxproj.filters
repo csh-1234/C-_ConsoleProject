@@ -60,6 +60,16 @@
     <ClCompile Include="Manager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="MapManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="소스1.cpp" />
+    <ClCompile Include="Monster.cpp">
+      <Filter>Creature\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="소스2.cpp" />
+    <ClCompile Include="소스7.cpp" />
+    <ClCompile Include="소스8.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -89,6 +99,12 @@
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Creature\Monster</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

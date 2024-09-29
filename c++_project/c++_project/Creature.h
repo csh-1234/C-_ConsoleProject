@@ -34,7 +34,11 @@ public:
 	void SetSpeed(int inputSpeed);
 	int GetMoney()const;
 	void SetMoney(int inputMoney);
-	void PrintUnit();;
+	int GetPosX()const;
+	void SetPosX(int inputPosX);
+	int GetPosY()const;
+	void SetPosY(int inputPosY);
+	void PrintUnit();
 #pragma endregion
 #pragma region CommonMethod
 	//void addActiveSkill(Skill* skill)
@@ -61,6 +65,8 @@ protected:
 	int _avoidRate;		// 기본 회피율
 	int _speed;			// 기본 속도
 	int _money;			// 소지금
+	int _posX;
+	int _posY;
 	/*vector<Skill*> _ActiveSkillList;
 	vector<Skill*> _PassiveSkillList;*/
 	//vector<Item*> _inventory;
