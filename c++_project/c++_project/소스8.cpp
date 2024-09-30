@@ -10,7 +10,8 @@ private:
     HANDLE hConsole;
 
 public:
-    ConsoleBuffer(int w, int h) : width(w), height(h), buffer(h, std::vector<wchar_t>(w, L' ')) {
+    ConsoleBuffer(int w, int h) : width(w), height(h), buffer(h, std::vector<wchar_t>(w, L' ')) 
+    {
         hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
         SetConsoleScreenBufferSize(hConsole, { (SHORT)w, (SHORT)h });
     }
@@ -50,11 +51,88 @@ void DrawMessageBox(ConsoleBuffer& buffer, const std::wstring& message) {
     buffer.DrawAt(16, 41, message);
 }
 
+void DrawSkillList(ConsoleBuffer& buffer) 
+{
+    buffer.DrawAt(30, 30, L"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+    buffer.DrawAt(30, 31, L"┃                                                                   ┃");
+    buffer.DrawAt(26, 32, L"┃        파이어볼                                                    ┃");
+    buffer.DrawAt(30, 33, L"┃                                                                   ┃");
+    buffer.DrawAt(30, 34, L"┃        힐                                                         ┃");
+    buffer.DrawAt(30, 35, L"┃                                                                   ┃");
+    buffer.DrawAt(30, 36, L"┃        메테오                                                      ┃");
+    buffer.DrawAt(30, 37, L"┃                                                                   ┃");
+    buffer.DrawAt(30, 38, L"┃        뒤로가기                                                    ┃");
+    buffer.DrawAt(30, 39, L"┃                                                                   ┃");
+    buffer.DrawAt(30, 40, L"┃                                                                   ┃");
+    buffer.DrawAt(30, 41, L"┃                                                                   ┃");
+    buffer.DrawAt(30, 42, L"┃                                                                   ┃");
+    buffer.DrawAt(30, 43, L"┃                                                                   ┃");
+    buffer.DrawAt(30, 44, L"┃                                                                   ┃");
+    buffer.DrawAt(30, 45, L"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+}
+
+void DrawBattleChoiceUI(ConsoleBuffer& buffer) {
+    buffer.DrawAt(5, 30, L"┏━━━━━━━━━━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ");
+    buffer.DrawAt(5, 31, L"┃                      ┃ ┃                                                                   ┃ ");
+    buffer.DrawAt(5, 32, L"┃       행동 선택      ┃ ┃                                                                   ┃");
+    buffer.DrawAt(5, 33, L"┃                      ┃ ┃                                                                   ┃ ");
+    buffer.DrawAt(5, 34, L"┃ ━━━━━━━━━━━━━━━━━━━━ ┃ ┃                                                                   ┃ ");
+    buffer.DrawAt(5, 35, L"┃                      ┃ ┃                                                                   ┃ ");
+    buffer.DrawAt(5, 36, L"┃ ▶ 공격              ┃ ┃                                                                   ┃");
+    buffer.DrawAt(5, 37, L"┃                      ┃ ┃                                                                   ┃ ");
+    buffer.DrawAt(5, 38, L"┃    스킬              ┃ ┃                                                                   ┃ ");
+    buffer.DrawAt(5, 39, L"┃                      ┃ ┃                                                                   ┃ ");
+    buffer.DrawAt(5, 40, L"┃    인벤토리          ┃ ┃                                                                   ┃");
+    buffer.DrawAt(5, 41, L"┃                      ┃ ┃                                                                   ┃ ");
+    buffer.DrawAt(5, 42, L"┃    도망치기          ┃ ┃                                                                   ┃");
+    buffer.DrawAt(5, 43, L"┃                      ┃ ┃                                                                   ┃ ");
+    buffer.DrawAt(5, 44, L"┃                      ┃ ┃                                                                   ┃ ");
+    buffer.DrawAt(5, 45, L"┗━━━━━━━━━━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ");
+}
+
+void DrawSlimeImage(ConsoleBuffer& buffer)
+{
+    buffer.DrawAt(30, 10, L"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+    buffer.DrawAt(30, 11, L"┃                                     ┃");
+    buffer.DrawAt(30, 12, L"┃                                     ┃");
+    buffer.DrawAt(30, 13, L"┃                                     ┃");
+    buffer.DrawAt(30, 14, L"┃                                     ┃");
+    buffer.DrawAt(30, 15, L"┃                                     ┃");
+    buffer.DrawAt(30, 16, L"┃                                     ┃");
+    buffer.DrawAt(30, 17, L"┃                 ○                  ┃");
+    buffer.DrawAt(30, 18, L"┃             ○       ○             ┃");
+    buffer.DrawAt(30, 19, L"┃         ○               ○         ┃");
+    buffer.DrawAt(30, 20, L"┃       ○                   ○       ┃");
+    buffer.DrawAt(30, 21, L"┃     ○                       ○     ┃");
+    buffer.DrawAt(30, 22, L"┃    ○       ●         ●     ○    ┃");
+    buffer.DrawAt(30, 23, L"┃    ○       ●         ●     ○    ┃");
+    buffer.DrawAt(30, 24, L"┃     ○                       ○     ┃");
+    buffer.DrawAt(30, 25, L"┃      ○                     ○      ┃");
+    buffer.DrawAt(30, 26, L"┃        ○                 ○        ┃");
+    buffer.DrawAt(30, 27, L"┃          ○ ○ ○ ○ ○ ○          ┃");
+    buffer.DrawAt(30, 28, L"┃                                     ┃");
+    buffer.DrawAt(30, 29, L"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+}
+
 void DrawBattleUI(ConsoleBuffer& buffer) {
     buffer.DrawAt(30, 10, L"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-    for (int i = 11; i < 29; ++i) {
-        buffer.DrawAt(30, i, L"┃                                     ┃");
-    }
+    buffer.DrawAt(30, 12, L"┃                                     ┃");
+    buffer.DrawAt(30, 13, L"┃                                     ┃");
+    buffer.DrawAt(30, 14, L"┃                                     ┃");
+    buffer.DrawAt(30, 15, L"┃                                     ┃");
+    buffer.DrawAt(30, 16, L"┃                                     ┃");
+    buffer.DrawAt(30, 17, L"┃                                     ┃");
+    buffer.DrawAt(30, 18, L"┃                                     ┃");
+    buffer.DrawAt(30, 19, L"┃                                     ┃");
+    buffer.DrawAt(30, 20, L"┃                                     ┃");
+    buffer.DrawAt(30, 21, L"┃                                     ┃");
+    buffer.DrawAt(30, 22, L"┃                                     ┃");
+    buffer.DrawAt(30, 23, L"┃                                     ┃");
+    buffer.DrawAt(30, 24, L"┃                                     ┃");
+    buffer.DrawAt(30, 25, L"┃                                     ┃");
+    buffer.DrawAt(30, 26, L"┃                                     ┃");
+    buffer.DrawAt(30, 27, L"┃                                     ┃");
+    buffer.DrawAt(30, 28, L"┃                                     ┃");
     buffer.DrawAt(30, 29, L"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
     //buffer.DrawAt(13, 32, L"행동 선택");
@@ -83,42 +161,45 @@ int main() {
 
     while (true) {
         buffer.Clear();
-
-        if (showBattleUI) {
-            DrawBattleUI(buffer);
-        }
-
-        if (showMessage) {
-            DrawMessageBox(buffer, currentMessage);
-        }
-
+        DrawSlimeImage(buffer);
+        DrawBattleChoiceUI(buffer);
+        //DrawSkillList(buffer);
         buffer.Render();
+        //if (showBattleUI) {
+        //    DrawBattleUI(buffer);
+        //}
 
-        // 사용자 입력 처리
-        if (GetAsyncKeyState('B') & 0x8000) {
-            if (!bKeyDown) {
-                showBattleUI = !showBattleUI;
-                bKeyDown = true;  // 키가 눌렸음을 기록
-            }
-        }
-        else {
-            bKeyDown = false; // 키가 떼어졌을 때 상태 초기화
-        }
+        //if (showMessage) {
+        //    DrawMessageBox(buffer, currentMessage);
+        //}
 
-        if (GetAsyncKeyState('M') & 0x8000) {
-            if (!mKeyDown) {
-                showMessage = !showMessage;
-                //if (showMessage) {
-                //    currentMessage = L"아이템을(를) 획득하셨습니다.";  // 유니코드 문자열로 변경
-                //}
-                mKeyDown = true;  // 키가 눌렸음을 기록
-            }
-        }
-        else {
-            mKeyDown = false;  // 키가 떼어졌을 때 상태 초기화
-        }
+        //buffer.Render();
 
-        Sleep(100);  // CPU 사용량 감소를 위한 짧은 대기 시간
+        //// 사용자 입력 처리
+        //if (GetAsyncKeyState('B') & 0x8000) {
+        //    if (!bKeyDown) {
+        //        showBattleUI = !showBattleUI;
+        //        bKeyDown = true;  // 키가 눌렸음을 기록
+        //    }
+        //}
+        //else {
+        //    bKeyDown = false; // 키가 떼어졌을 때 상태 초기화
+        //}
+
+        //if (GetAsyncKeyState('M') & 0x8000) {
+        //    if (!mKeyDown) {
+        //        showMessage = !showMessage;
+        //        //if (showMessage) {
+        //        //    currentMessage = L"아이템을(를) 획득하셨습니다.";  // 유니코드 문자열로 변경
+        //        //}
+        //        mKeyDown = true;  // 키가 눌렸음을 기록
+        //    }
+        //}
+        //else {
+        //    mKeyDown = false;  // 키가 떼어졌을 때 상태 초기화
+        //}
+
+        //Sleep(100);  // CPU 사용량 감소를 위한 짧은 대기 시간
     }
 
     return 0;

@@ -8,10 +8,10 @@ enum class CharacterClass
 };
 enum class MonsterType
 {
-	SLIME = 1,
-	GOBLIN = 2,
-	SKELETON = 3,
-	NONE = 4,
+	SLIME = 0,
+	GOBLIN = 1,
+	SKELETON = 2,
+	NONE = 3,
 };
 enum UnitType
 {

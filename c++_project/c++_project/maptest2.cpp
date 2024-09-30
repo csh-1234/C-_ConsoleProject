@@ -43,13 +43,6 @@ int buffer2[50][50] = {};
 const int ViewSizeX = 100; // 18 12
 const int ViewSizeY = 100;
 
-vector<string> backBuffer(50, string(100, ' ')); // 50줄, 한 줄에 100개의 공백
-void drawToBuffer(int x, int y, const std::string& text) {
-    if (y >= 0 && y < backBuffer.size() && x >= 0 && x + text.size() < backBuffer[y].size()) 
-    {
-        backBuffer[y].replace(x, text.size(), text); // (x, y) 위치에 텍스트 쓰기
-    }
-}
 
 #pragma region 맵핵
 //void DrawBuffer()
@@ -529,7 +522,7 @@ int main()
     manager.map.LoadMap(eMaps::Village);
 
     Map* currentmap;
-    //currentmap = manager.map.GetCurrentMap();
+    ////currentmap = manager.map.GetCurrentMap();
     //DrawBuffer2(currentmap);
     //renderBuffer2(currentmap);
     //PrintBattleUI();
@@ -545,11 +538,10 @@ int main()
         DrawBuffer2(currentmap);
         renderBuffer2(currentmap);
         MovePlayer(currentmap);
-        printRightUI();
+ /*       printRightUI();
         printUserInfo();
-        PrintKeyboardState();
-        //PrintMessage();
-        //PrintBattleUI();
+        PrintKeyboardState();*/
+     
         
     }
 }

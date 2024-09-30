@@ -2,8 +2,7 @@
 #include <iostream>
 using namespace std;
 
-Creature::Creature(int unitType) :
-	_name(""), _unitType(unitType), _maxHp(0), _hp(0), _maxMp(0), _mp(0), _atk(0), _def(0), _criRate(0),
+Creature::Creature(int unitType) :_name(""), _unitType(unitType), _maxHp(0), _hp(0), _maxMp(0), _mp(0), _atk(0), _def(0), _criRate(0),
 	_criDamage(0), _avoidRate(0), _speed(0), _money(0), _posX(1), _posY(1) {}
 Creature::~Creature() {}
 

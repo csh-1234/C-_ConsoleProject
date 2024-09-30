@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Knight.h"
 #include "Monster.h"
+#include <string>
 
 
 using namespace std;
@@ -49,6 +50,14 @@ public:
         }
     }
 
+    void ChangeAt(int x, int y, const std::wstring& str) {  // 諦檜萄 僥濠翮 餌辨
+        for (size_t i = 0; i < str.length() && x + i < width; ++i) {
+            if (y >= 0 && y < height && x + i >= 0) {
+                buffer[y][x + i] = str[i];
+            }
+        }
+    }
+
     void Render() {
         COORD topLeft = { 0, 0 };
         DWORD written;
@@ -67,53 +76,225 @@ const int VIEWPORT_WIDTH = 20;  // �飛橦� ル衛腎朝 傘綠
 const int VIEWPORT_HEIGHT = 10; // �飛橦� ル衛腎朝 堪檜
 
 Knight* player = new Knight("�垮瘚�");
+Slime* slime;
 Monster* monster;
-int playerX = player->GetPosX();
+int playerX = player->GetPosX(); 
 int playerY = player->GetPosY();
 
 string buffer[MAP_HEIGHT] = {};
 int buffer2[50][50] = {};
 
-const int ViewSizeX = 100; // 18 12
-const int ViewSizeY = 100;
+const int ViewSizeX = 18; // 18 12
+const int ViewSizeY = 12;
 
 void DrawMessageBox(ConsoleBuffer& buffer, const std::wstring& message) {
     buffer.DrawAt(4, 35, L"旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬");
-    for (int i = 36; i < 47; ++i) {
-        buffer.DrawAt(4, i, L"早                                                                                         早");
-    }
+    buffer.DrawAt(4, 36, L"早                                                                                         早");
+    buffer.DrawAt(4, 37, L"早                                                                                         早");
+    buffer.DrawAt(4, 38, L"早                                                                                         早");
+    buffer.DrawAt(4, 39, L"早                                                                                         早");
+    buffer.DrawAt(4, 40, L"早                                                                                         早");
+    buffer.DrawAt(4, 41, L"                                                                                           ");
+    buffer.DrawAt(4, 42, L"早                                                                                         早");
+    buffer.DrawAt(4, 43, L"早                                                                                         早");
+    buffer.DrawAt(4, 44, L"早                                                                                         早");
+    buffer.DrawAt(4, 45, L"早                                                                                         早");
+    buffer.DrawAt(4, 46, L"早                                                                                         早");
     buffer.DrawAt(4, 47, L"曲收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旭");
-
     buffer.DrawAt(16, 41, message);
 }
-void DrawBattleUI(ConsoleBuffer& buffer) {
-    buffer.DrawAt(30, 10, L"旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬");
-    for (int i = 11; i < 29; ++i) {
-        buffer.DrawAt(30, i, L"早                                     早");
-    }
-    buffer.DrawAt(30, 29, L"曲收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旭");
 
-    //buffer.DrawAt(13, 32, L"ч翕 摹鷗");
-    //buffer.DrawAt(6, 34, L" 收收收收收收收收收收收收收收收收收收收收 ");
-    //buffer.DrawAt(10, 36, L"奢問");  // 斜傖 奢問
-    //buffer.DrawAt(10, 38, L"蝶鑒");  // 蝶鑒 葬蝶お蒂 銑溥輿堅 殮溘 嫡嬴撿 й蛭
-    //buffer.DrawAt(10, 40, L"檣漸饜葬"); // 嬴檜蠱 葬蝶お蒂 銑溥輿堅 殮溘 嫡嬴撿 й蛭
-    //buffer.DrawAt(10, 42, L"紫蜂纂晦");
-
+void DrawMessageBox(ConsoleBuffer& buffer) {
+    buffer.DrawAt(4, 35, L"旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬");
+    buffer.DrawAt(4, 36, L"早                                                                                         早");
+    buffer.DrawAt(4, 37, L"早                                                                                         早");
+    buffer.DrawAt(4, 38, L"早                                                                                         早");
+    buffer.DrawAt(4, 39, L"早                                                                                         早");
+    buffer.DrawAt(4, 40, L"早                                                                                         早");
+    buffer.DrawAt(4, 41, L"                                                                                           ");
+    buffer.DrawAt(4, 42, L"早                                                                                         早");
+    buffer.DrawAt(4, 43, L"早                                                                                         早");
+    buffer.DrawAt(4, 44, L"早                                                                                         早");
+    buffer.DrawAt(4, 45, L"早                                                                                         早");
+    buffer.DrawAt(4, 46, L"早                                                                                         早");
+    buffer.DrawAt(4, 47, L"曲收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旭");
+}
+void DrawBattleChoiceAttack(ConsoleBuffer& buffer) {
     buffer.DrawAt(5, 30, L"旨收收收收收收收收收收收收收收收收收收收收收收旬");
-    for (int i = 31; i < 45; ++i) {
-        buffer.DrawAt(5, i, L"早                      早");
-    }
+    buffer.DrawAt(5, 31, L"早                      早");
+    buffer.DrawAt(5, 32, L"早       ч翕 摹鷗      早");
+    buffer.DrawAt(5, 33, L"早                      早");
+    buffer.DrawAt(5, 34, L"早 收收收收收收收收收收收收收收收收收收收收 早");
+    buffer.DrawAt(5, 35, L"早                      早");
+    buffer.DrawAt(5, 36, L"早   Ⅱ 奢問            早");
+    buffer.DrawAt(5, 37, L"早                      早");
+    buffer.DrawAt(5, 38, L"早    蝶鑒              早");
+    buffer.DrawAt(5, 39, L"早                      早");
+    buffer.DrawAt(5, 40, L"早    檣漸饜葬          早");
+    buffer.DrawAt(5, 41, L"早                      早");
+    buffer.DrawAt(5, 42, L"早    紫蜂纂晦          早");
+    buffer.DrawAt(5, 43, L"早                      早");
+    buffer.DrawAt(5, 44, L"早                      早");
+    buffer.DrawAt(5, 45, L"曲收收收收收收收收收收收收收收收收收收收收收收旭");
+}
+void DrawBattleChoiceSkill(ConsoleBuffer& buffer) {
+    buffer.DrawAt(5, 30, L"旨收收收收收收收收收收收收收收收收收收收收收收旬");
+    buffer.DrawAt(5, 31, L"早                      早");
+    buffer.DrawAt(5, 32, L"早       ч翕 摹鷗      早");
+    buffer.DrawAt(5, 33, L"早                      早");
+    buffer.DrawAt(5, 34, L"早 收收收收收收收收收收收收收收收收收收收收 早");
+    buffer.DrawAt(5, 35, L"早                      早");
+    buffer.DrawAt(5, 36, L"早    奢問              早");
+    buffer.DrawAt(5, 37, L"早                      早");
+    buffer.DrawAt(5, 38, L"早   Ⅱ 蝶鑒            早");
+    buffer.DrawAt(5, 39, L"早                      早");
+    buffer.DrawAt(5, 40, L"早    檣漸饜葬          早");
+    buffer.DrawAt(5, 41, L"早                      早");
+    buffer.DrawAt(5, 42, L"早    紫蜂纂晦          早");
+    buffer.DrawAt(5, 43, L"早                      早");
+    buffer.DrawAt(5, 44, L"早                      早");
+    buffer.DrawAt(5, 45, L"曲收收收收收收收收收收收收收收收收收收收收收收旭");
+}
+void DrawBattleChoiceInven(ConsoleBuffer& buffer) {
+    buffer.DrawAt(5, 30, L"旨收收收收收收收收收收收收收收收收收收收收收收旬");
+    buffer.DrawAt(5, 31, L"早                      早");
+    buffer.DrawAt(5, 32, L"早       ч翕 摹鷗      早");
+    buffer.DrawAt(5, 33, L"早                      早");
+    buffer.DrawAt(5, 34, L"早 收收收收收收收收收收收收收收收收收收收收 早");
+    buffer.DrawAt(5, 35, L"早                      早");
+    buffer.DrawAt(5, 36, L"早    奢問              早");
+    buffer.DrawAt(5, 37, L"早                      早");
+    buffer.DrawAt(5, 38, L"早    蝶鑒              早");
+    buffer.DrawAt(5, 39, L"早                      早");
+    buffer.DrawAt(5, 40, L"早   Ⅱ 檣漸饜葬        早");
+    buffer.DrawAt(5, 41, L"早                      早");
+    buffer.DrawAt(5, 42, L"早    紫蜂纂晦          早");
+    buffer.DrawAt(5, 43, L"早                      早");
+    buffer.DrawAt(5, 44, L"早                      早");
     buffer.DrawAt(5, 45, L"曲收收收收收收收收收收收收收收收收收收收收收收旭");
 }
 
+void DrawBattleChoiceRunAway(ConsoleBuffer& buffer) {
+    buffer.DrawAt(5, 30, L"旨收收收收收收收收收收收收收收收收收收收收收收旬");
+    buffer.DrawAt(5, 31, L"早                      早");
+    buffer.DrawAt(5, 32, L"早       ч翕 摹鷗      早");
+    buffer.DrawAt(5, 33, L"早                      早");
+    buffer.DrawAt(5, 34, L"早 收收收收收收收收收收收收收收收收收收收收 早");
+    buffer.DrawAt(5, 35, L"早                      早");
+    buffer.DrawAt(5, 36, L"早    奢問              早");
+    buffer.DrawAt(5, 37, L"早                      早");
+    buffer.DrawAt(5, 38, L"早    蝶鑒              早");
+    buffer.DrawAt(5, 39, L"早                      早");
+    buffer.DrawAt(5, 40, L"早    檣漸饜葬          早");
+    buffer.DrawAt(5, 41, L"早                      早");
+    buffer.DrawAt(5, 42, L"早   Ⅱ 紫蜂纂晦        早");
+    buffer.DrawAt(5, 43, L"早                      早");
+    buffer.DrawAt(5, 44, L"早                      早");
+    buffer.DrawAt(5, 45, L"曲收收收收收收收收收收收收收收收收收收收收收收旭");
+}
 
-vector<string> backBuffer(50, string(100, ' ')); // 50還, и 還縑 100偃曖 奢寥
-void drawToBuffer(int x, int y, const std::string& text) {
-    if (y >= 0 && y < backBuffer.size() && x >= 0 && x + text.size() < backBuffer[y].size()) 
-    {
-        backBuffer[y].replace(x, text.size(), text); // (x, y) 嬪纂縑 臢蝶お 噙晦
-    }
+void DrawEmptyImage(ConsoleBuffer& buffer) {
+    buffer.DrawAt(30, 10, L"旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬");
+    buffer.DrawAt(30, 12, L"早                                     早");
+    buffer.DrawAt(30, 13, L"早                                     早");
+    buffer.DrawAt(30, 14, L"早                                     早");
+    buffer.DrawAt(30, 15, L"早                                     早");
+    buffer.DrawAt(30, 16, L"早                                     早");
+    buffer.DrawAt(30, 17, L"早                                     早");
+    buffer.DrawAt(30, 18, L"早                                     早");
+    buffer.DrawAt(30, 19, L"早                                     早");
+    buffer.DrawAt(30, 20, L"早                                     早");
+    buffer.DrawAt(30, 21, L"早                                     早");
+    buffer.DrawAt(30, 22, L"早                                     早");
+    buffer.DrawAt(30, 23, L"早                                     早");
+    buffer.DrawAt(30, 24, L"早                                     早");
+    buffer.DrawAt(30, 25, L"早                                     早");
+    buffer.DrawAt(30, 26, L"早                                     早");
+    buffer.DrawAt(30, 27, L"早                                     早");
+    buffer.DrawAt(30, 28, L"早                                     早");
+    buffer.DrawAt(30, 29, L"曲收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旭");
+}
+void DrawSlimeImage(ConsoleBuffer& buffer)
+{
+    buffer.DrawAt(30, 10, L"旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬");
+    buffer.DrawAt(30, 11, L"早                                     早");
+    buffer.DrawAt(30, 12, L"早                                     早");
+    buffer.DrawAt(30, 13, L"早                                     早");
+    buffer.DrawAt(30, 14, L"早                                     早");
+    buffer.DrawAt(30, 15, L"早                                     早");
+    buffer.DrawAt(30, 16, L"早                                     早");
+    buffer.DrawAt(30, 17, L"早                 ∞                  早");
+    buffer.DrawAt(30, 18, L"早             ∞       ∞             早");
+    buffer.DrawAt(30, 19, L"早         ∞               ∞         早");
+    buffer.DrawAt(30, 20, L"早       ∞                   ∞       早");
+    buffer.DrawAt(30, 21, L"早     ∞                       ∞     早");
+    buffer.DrawAt(30, 22, L"早    ∞       ≒         ≒     ∞    早");
+    buffer.DrawAt(30, 23, L"早    ∞       ≒         ≒     ∞    早");
+    buffer.DrawAt(30, 24, L"早     ∞                       ∞     早");
+    buffer.DrawAt(30, 25, L"早      ∞                     ∞      早");
+    buffer.DrawAt(30, 26, L"早        ∞                 ∞        早");
+    buffer.DrawAt(30, 27, L"早          ∞ ∞ ∞ ∞ ∞ ∞          早");
+    buffer.DrawAt(30, 28, L"早                                     早");
+    buffer.DrawAt(30, 29, L"曲收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旭");
+}
+void DrawSkillList(ConsoleBuffer& buffer)
+{
+    buffer.DrawAt(30, 30, L"旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬");
+    buffer.DrawAt(30, 31, L"早                                                                   早");
+    buffer.DrawAt(26, 32, L"早        だ檜橫獐                                                   早");
+    buffer.DrawAt(30, 33, L"早                                                                   早");
+    buffer.DrawAt(30, 34, L"早        ��                                                         早");
+    buffer.DrawAt(30, 35, L"早                                                                   早");
+    buffer.DrawAt(28, 36, L"早        詭纔螃                                                     早");
+    buffer.DrawAt(30, 37, L"早                                                                   早");
+    buffer.DrawAt(27, 38, L"早        菴煎陛晦                                                   早");
+    buffer.DrawAt(30, 39, L"早                                                                   早");
+    buffer.DrawAt(26, 40, L"早                                                                   早");
+    buffer.DrawAt(30, 41, L"早                                                                   早");
+    buffer.DrawAt(26, 42, L"早                                                                   早");
+    buffer.DrawAt(30, 43, L"早                                                                   早");
+    buffer.DrawAt(30, 44, L"早                                                                   早");
+    buffer.DrawAt(30, 45, L"曲收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旭");
+}
+void DrawInvenList(ConsoleBuffer& buffer)
+{
+    buffer.DrawAt(30, 30, L"旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬");
+    buffer.DrawAt(30, 31, L"早                                                                   早");
+    buffer.DrawAt(26, 32, L"早        羹溘僭擒                                                   早");
+    buffer.DrawAt(30, 33, L"早                                                                   早");
+    buffer.DrawAt(30, 34, L"早        葆釭僭擒                                                   早");
+    buffer.DrawAt(30, 35, L"早                                                                   早");
+    buffer.DrawAt(28, 36, L"早        縣葛憮                                                     早");
+    buffer.DrawAt(30, 37, L"早                                                                   早");
+    buffer.DrawAt(28, 38, L"早        菴煎陛晦                                                   早");
+    buffer.DrawAt(30, 39, L"早                                                                   早");
+    buffer.DrawAt(25, 40, L"早                                                                   早");
+    buffer.DrawAt(30, 41, L"早                                                                   早");
+    buffer.DrawAt(26, 42, L"早                                                                   早");
+    buffer.DrawAt(30, 43, L"早                                                                   早");
+    buffer.DrawAt(30, 44, L"早                                                                   早");
+    buffer.DrawAt(30, 45, L"曲收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旭");
+}
+void DrawBattleUI(ConsoleBuffer& buffer) {
+    buffer.DrawAt(30, 10, L"旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬");
+    buffer.DrawAt(30, 12, L"早                                     早");
+    buffer.DrawAt(30, 13, L"早                                     早");
+    buffer.DrawAt(30, 14, L"早                                     早");
+    buffer.DrawAt(30, 15, L"早                                     早");
+    buffer.DrawAt(30, 16, L"早                                     早");
+    buffer.DrawAt(30, 17, L"早                                     早");
+    buffer.DrawAt(30, 18, L"早                                     早");
+    buffer.DrawAt(30, 19, L"早                                     早");
+    buffer.DrawAt(30, 20, L"早                                     早");
+    buffer.DrawAt(30, 21, L"早                                     早");
+    buffer.DrawAt(30, 22, L"早                                     早");
+    buffer.DrawAt(30, 23, L"早                                     早");
+    buffer.DrawAt(30, 24, L"早                                     早");
+    buffer.DrawAt(30, 25, L"早                                     早");
+    buffer.DrawAt(30, 26, L"早                                     早");
+    buffer.DrawAt(30, 27, L"早                                     早");
+    buffer.DrawAt(30, 28, L"早                                     早");
+    buffer.DrawAt(30, 29, L"曲收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旭");
 }
 
 #pragma region 裘р
@@ -161,8 +342,23 @@ void printRightUI();
 void PrintKeyboardState();
 void PrintMessage();
 void printUserInfo();
-void clearScreen(); 
+void clearScreen1()
+{
+    // 醴憮蒂 裔 嬪煎 檜翕
+    std::cout << "\033[H";
+}
+
 void gotoxy(int x, int y);
+
+void inputAnyKey()
+{
+    Manager& manager = manager.getInstance();
+    while (true)
+    {
+        manager.input.Update();
+        if (manager.input.GetKeyDown(eKeyCode::Space)) return;
+    }
+}
 
 void DrawBuffer2(Map* currentMap)
 {
@@ -262,22 +458,281 @@ void MovePlayer(Map* currentMap)
     }
     case (int)EGameObject::MONSTER:
     {
-        monster = new Monster(MonsterType::SLIME);
+        //檜 跨蝶攪陛 橫雯 跨蝶攪檣雖 橫飩啪 憲嬴撿 ж朝陛?
+        //憲 в蹂陛 橈紫煙 虜萇棻. 楠渾戲煎 儅撩ж賊脹棻.
+        //避艘擊 陽朝 斜傖 裘 鼻縑憮 雖錶幗萼棻.
+
+     /*   switch (rand() % 3)
+        {
+        case 0:
+            monster = new Monster(MonsterType::SLIME);
+            break;
+        case 1:
+            monster = new Monster(MonsterType::GOBLIN);
+            break;
+        case 2:
+            monster = new Monster(MonsterType::SKELETON);
+            break;
+        default:
+            monster = new Monster(MonsterType::SLIME);
+            break;
+        }*/
+        slime = new Slime();
+
         ConsoleBuffer buffer(100, 50);  // 夔樂 觼晦蒂 撲薑ц蝗棲棻
 
-        bool showBattleUI = true;
-        bool showMessage = false;
         std::wstring currentMessage = L"";
+        bool showBattleUI = false;
+        bool showMessage = false;
+
+        bool IsdrawSkillList = false;
+        bool IsdrawInvenList = false;
 
         bool bKeyDown = false; // 'B' 酈 殮溘 鼻鷓
         bool mKeyDown = false; // 'M' 酈 殮溘 鼻鷓
-
+        int menuSelect = 1;
+        // 1 = attack; 2 = skill 3 = inven; 4 = runawy
+        //bool showBattleUI = true;
         while (true) 
         {
+            manager.input.Update();
+            //clearScreen1();
+            buffer.Clear();
+            //DrawSlimeImage(buffer);
+            
+            DrawSlimeImage(buffer);
+            switch (menuSelect)
+            {
+            case 1:
+                DrawBattleChoiceAttack(buffer);
+                break;
+            case 2:
+                DrawBattleChoiceSkill(buffer);
+                break;
+            case 3:
+                DrawBattleChoiceInven(buffer);
+                break;
+            case 4:
+                DrawBattleChoiceRunAway(buffer);
+                break;
+            default:
+                DrawBattleChoiceAttack(buffer);
+                break;
+            }
+
+            if (manager.input.GetKeyDown(eKeyCode::Down))
+            {
+                menuSelect++;
+                IsdrawSkillList = false;
+                IsdrawInvenList = false;
+                if (menuSelect == 5)
+                {
+                    menuSelect = 4;
+                }
+            }
+            if (manager.input.GetKeyDown(eKeyCode::Up))
+            {
+                menuSelect--;
+                IsdrawSkillList = false;
+                IsdrawInvenList = false;
+                if (menuSelect == 0)
+                {
+                    menuSelect = 1;
+                }
+            }
+
+            bool death = false;
+            if (manager.input.GetKeyDown(eKeyCode::Space))
+            {
+                if (menuSelect == 1)
+                {
+                    int damage;
+                    
+                    while (true)
+                    {
+                        manager.input.Initialize();
+                        manager.input.Update();
+                        damage = player->GetAtk() - slime->GetDef();
+                        if (damage <= 0) damage = 0;
+                        DrawMessageBox(buffer, L"Ы溯檜橫曖 奢問!                                                               ");
+                        buffer.Render();
+                        inputAnyKey();
+
+                        DrawMessageBox(buffer, L"跨蝶攪縑啪 " + to_wstring(damage) + L"等嘐雖蒂 殮��!                                                    ");
+                        slime->SetHp(slime->GetHp() - damage);
+                        buffer.Render();
+                        inputAnyKey();
+
+                        if (slime->GetHp() <= 0 || player->GetHp() <= 0)
+                        {
+                            DrawMessageBox(buffer, L"跨蝶攪蒂 噙楝お葡                                                    ");
+                            buffer.Render();
+                            inputAnyKey();
+                            death = true;
+                            break;
+                        }
+
+                        DrawMessageBox(buffer, L"                                                                                           ");
+                        DrawMessageBox(buffer, L"跨蝶攪 羹溘 " + to_wstring(slime->GetHp()));
+                        buffer.Render();
+                        inputAnyKey();
+
+                        damage = slime->GetAtk() - player->GetDef();
+                        if (damage <= 0) damage = 0;
+                        DrawMessageBox(buffer, L"跨蝶攪曖 奢問!                                                                 ");
+                        buffer.Render();
+                        inputAnyKey();
+
+                        DrawMessageBox(buffer, L"Ы溯檜橫縑啪 " + to_wstring(damage) + L"等嘐雖蒂 殮��!                                                    ");
+                        buffer.Render();
+                        inputAnyKey();
+
+                        DrawMessageBox(buffer, L"早                                                                                          ");
+                        DrawMessageBox(buffer, L"Ы溯檜橫 羹溘 " + to_wstring(player->GetHp()));
+                        buffer.Render();
+                        inputAnyKey();
+                        break;
+                        
+                        
+                    }
+                }
+                else if (menuSelect == 2)
+                {
+                    IsdrawSkillList = true;
+                    int skillNum = 0;
+                    while (true)
+                    {
+                        manager.input.Update();
+                        if (manager.input.GetKeyDown(eKeyCode::Down))
+                        {
+                            skillNum++;
+                            if (skillNum == 3)
+                            {
+                                skillNum = 3;
+                            }
+                        }
+                        if (manager.input.GetKeyDown(eKeyCode::Up))
+                        {
+                            skillNum--;
+                            if (skillNum == -1)
+                            {
+                                skillNum = 0;
+                            }
+                        }
+                        DrawSkillList(buffer);
+                        switch (skillNum)
+                        {
+                        case 0:
+                            buffer.DrawAt(33, 32, L"Ⅱ だ檜橫獐");
+                            break;
+                        case 1:
+                            buffer.DrawAt(37, 34, L"Ⅱ ��");
+                            break;
+                        case 2:
+                            buffer.DrawAt(35, 36, L"Ⅱ 詭纔螃");
+                            break;
+                        case 3:
+                            buffer.DrawAt(35, 38, L"Ⅱ 菴煎陛晦");
+                            break;
+                        default:
+                            break;
+                        }
+                        if (manager.input.GetKeyDown(eKeyCode::Space))
+                        {
+                            if (skillNum == 0)
+                            {
+
+                            }
+                            else if (skillNum == 3)
+                            {
+                                IsdrawSkillList = false;
+                                break;
+                            }
+                        }
+
+                        buffer.Render();
+                    }
+                }
+                else if (menuSelect == 3)
+                {
+                    IsdrawInvenList = true;
+                    int itemNum = 0;
+                    while (true)
+                    {
+                        manager.input.Update();
+                        if (manager.input.GetKeyDown(eKeyCode::Down))
+                        {
+                            itemNum++;
+                            if (itemNum == 4)
+                            {
+                                itemNum = 3;
+                            }
+                        }
+                        if (manager.input.GetKeyDown(eKeyCode::Up))
+                        {
+                            itemNum--;
+                            if (itemNum == -1)
+                            {
+                                itemNum = 0;
+                            }
+                        }
+                        DrawInvenList(buffer);
+                        switch (itemNum)
+                        {
+                        case 0:
+                            buffer.DrawAt(33, 32, L"Ⅱ 羹溘僭擒");
+                            break;
+                        case 1:
+                            buffer.DrawAt(37, 34, L"Ⅱ 葆釭僭擒");
+                            break;
+                        case 2:
+                            buffer.DrawAt(35, 36, L"Ⅱ 縣葛憮");
+                            break;
+                        case 3:
+                            buffer.DrawAt(35, 38, L"Ⅱ 菴煎陛晦");
+                            break;
+                        default:
+                            break;
+                        }
+                        if (manager.input.GetKeyDown(eKeyCode::Space))
+                        {
+                            if (itemNum == 3)
+                            {
+                                IsdrawInvenList = false;
+                                break;
+                            }
+                        }
+
+                        
+                        buffer.Render();
+                    }
+                }
+                else if (menuSelect == 4)
+                {
+                    //TODO 紫蜂, 褒ぬ衛 跨蝶攪縑啪 и欐 蜃堅, 濠褐欐 陳嬴馬
+                    break;
+                }
+                if (death == true)
+                {
+                    currentMap->at(newPosY, newPosX) = 0;
+                    break;
+                }
+            }
+
+            if (IsdrawSkillList == true)
+            {
+                DrawSkillList(buffer);
+            }
+
+            if (IsdrawInvenList == true)
+            {
+                DrawInvenList(buffer);
+            }
+
+            
+            buffer.Render();
+
 #pragma region MyRegion
-
-
-
             //buffer.Clear();
 
             //DrawBattleUI(buffer);
@@ -315,10 +770,10 @@ void MovePlayer(Map* currentMap)
             //    break;
             //}
 #pragma endregion
-            clearScreen();
-            manager.input.Update();
-            PrintBattleUI();
+      
         }
+
+
         break;
     }
     case (int)EGameObject::EMPTY:
@@ -340,11 +795,6 @@ void CursorView()
     cursorInfo.bVisible = FALSE; //醴憮 Visible TRUE(爾歜) FALSE(獗梯)
     SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
 }
-void clearScreen()
-{
-    // 醴憮蒂 裔 嬪煎 檜翕
-    std::cout << "\033[H";
-}
 
 void gotoxy(int x, int y)
 {
@@ -355,10 +805,16 @@ void gotoxy(int x, int y)
     SetConsoleCursorPosition(consolHandle, pos);
 }
 
-// 裘 -> 裘
-// 裘 -> 瞪癱壁
-
-void printRightUI()
+void printRightUI(ConsoleBuffer& buffer)
+{
+    buffer.DrawAt(104,0, L"旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬");
+    for (size_t i = 1; i < 49; i++)
+    {
+        buffer.DrawAt(104, i,L"早                                               早");
+    }
+    buffer.DrawAt(104, 49, L"曲收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旭");
+}
+void printRightUI2()
 {
     gotoxy(104, 0);
     std::cout << "旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬";
@@ -369,7 +825,7 @@ void printRightUI()
     }
     gotoxy(104, 49);
     std::cout << "曲收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旭";
-    //clearScreen();
+    //clearScreen1();
 }
 void printUserInfo()
 {
@@ -602,7 +1058,6 @@ void PrintBattleUI()
     gotoxy(5, 45);
     std::cout << "曲收收收收收收收收收收收收收收收收收收收收收收旭";
 }
-
 void PrintBattleUI2()
 {
     gotoxy(5, 30);
@@ -628,39 +1083,34 @@ void PrintBattleUI2()
     std::cout << "曲收收收收收收收收收收收收收收收收收收收收收收旭";
 }
 
-
-
 int main()
 {
+    srand((unsigned)time(NULL));
     system("mode con:cols=155 lines=51");
-    CursorView();
+    //CursorView();
     Manager& manager = Manager::getInstance();
     manager.input.Initialize();
     manager.map.Initialize();
     manager.map.LoadMap(eMaps::Village);
 
+    //ConsoleBuffer buffer(100, 50);
+
+
     Map* currentmap;
-    //currentmap = manager.map.GetCurrentMap();
-    //DrawBuffer2(currentmap);
-    //renderBuffer2(currentmap);
-    //PrintBattleUI();
-    //printRightUI();
-    //printUserInfo();
-    //PrintKeyboardState();
-    //PrintMessage();
     while (true)
     {
-        clearScreen();
-        manager.input.Update();
-        currentmap = manager.map.GetCurrentMap();
-        DrawBuffer2(currentmap);
-        renderBuffer2(currentmap);
-        MovePlayer(currentmap);
-        printRightUI();
-        printUserInfo();
-        PrintKeyboardState();
-        //PrintMessage();
-        //PrintBattleUI();
-        
+           clearScreen1();
+           manager.input.Update();
+           currentmap = manager.map.GetCurrentMap();
+           DrawBuffer2(currentmap);
+           renderBuffer2(currentmap);
+           MovePlayer(currentmap);
+           printRightUI();
+           printUserInfo();
+           PrintKeyboardState();
+           PrintMessage();
+           PrintBattleUI();
+
     }
+
 }
