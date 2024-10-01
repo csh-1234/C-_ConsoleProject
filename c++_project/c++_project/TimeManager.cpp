@@ -6,21 +6,21 @@ LARGE_INTEGER TimeManager::PrevFrequency = {};
 LARGE_INTEGER TimeManager::CurrentFrequency = {};
 float TimeManager::DeltaTimeValue = 0.0f;
 
-void TimeManager::Initalize()
+void TimeManager::Initailize()
 {
-	// 실제 클럭수
+	// Cpu 고유 진동수
 	QueryPerformanceFrequency(&CpuFrequency);
-	// 프로그램 실행시 클럭수(누적)
-	QueryPerformanceCounter(&CpuFrequency);
+
+	// 프로그램이 시작 했을 때 현재 진동수
+	QueryPerformanceCounter(&PrevFrequency);
 }
 
 void TimeManager::Update()
 {
-	// 클럭 측정 시작
 	QueryPerformanceCounter(&CurrentFrequency);
-
+	
 	float differenceFrequency
-		= static_cast<float>(CurrentFrequency.QuadPart - PrevFrequency.QuadPart); // 최근 클럭 - 이전 클럭
-	DeltaTimeValue = differenceFrequency / static_cast<float>(CpuFrequency.QuadPart); // deltatime = 한 클럭당 횟수 / 기본클럭수
-	PrevFrequency.QuadPart = CurrentFrequency.QuadPart; // 한 사이클이 돌았으므로 이전 클럭을 최신화
-}  
+		= static_cast<float>(CurrentFrequency.QuadPart - PrevFrequency.QuadPart);
+	DeltaTimeValue = differenceFrequency / static_cast<float>(CpuFrequency.QuadPart);
+	PrevFrequency.QuadPart = CurrentFrequency.QuadPart;
+}

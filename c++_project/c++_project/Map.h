@@ -9,6 +9,7 @@ public:
 
 	int& at(int y, int x);
 	int** GenerateMap(string mapName);
+	int** GenerateMap2(string mapName);
 	string GetMapName();
 
 	

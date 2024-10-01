@@ -2,6 +2,7 @@
 #include "InputManager.h"
 #include "GameManager.h"
 #include "MapManager.h"
+#include "TimeManager.h"
 #include <iostream>
 class Manager {
 public:
@@ -11,6 +12,7 @@ public:
     InputManager& input = InputManager::getInstance();
     GameManager& game = GameManager::getInstance();
     MapManager& map = MapManager::getInstance();
+    //TimeManager& time = TimeManager::getInstance();
 
     static Manager& getInstance() 
     {

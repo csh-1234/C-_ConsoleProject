@@ -37,3 +37,4 @@ enum EquipmentType
 	Weapon,
 	Armor,
 };
+

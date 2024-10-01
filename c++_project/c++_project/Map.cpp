@@ -5,48 +5,51 @@
 
 Map::Map(const string inputName) : mapName(inputName)
 {
-    // TODO - 변동 맵사이즈 필요할 수 있음
-    int rows = 50;
-    int cols = 50;
-    mapInfo = new int* [50];
+    int rows = 50;  // 세로
+    int cols = 100; // 가로
 
-    // 파일 읽기 준비
+    mapInfo = new int* [rows];
+    for (int i = 0; i < rows; ++i) {
+        mapInfo[i] = new int[cols];
+    }
+
     ifstream in(mapName + ".txt");
 
-    int readMapDate[50][50] = {};
-    string mapDataBuffer;
-    int col = 0;
+    string mapData;
 
     if (!in.is_open())
     {
-        for (int row = 0; row < 50; ++row)
+        for (int row = 0; row < rows; ++row)
         {
-            readMapDate[row][col] = 0;
+            for (int col = 0; col < cols; ++col)
+            {
+                mapInfo[row][col] = 0;
+            }
         }
-        col++;
     }
     else
     {
-        while (getline(in, mapDataBuffer))
+        int row = 0;
+        while (getline(in, mapData) && row < rows)
         {
-            for (int row = 0; row < 50; ++row)
+            for (int col = 0; col < cols && col < mapData.size(); ++col)
             {
-                readMapDate[col][row] = mapDataBuffer[row] -'0';
+                mapInfo[row][col] = mapData[col] - '0';
             }
-            col += 1;
+            row++;
         }
-    }
 
-    for (size_t i = 0; i < cols; i++)
-    {
-        mapInfo[i] = new int[50];
-        for (size_t j = 0; j < rows; j++)
+        for (; row < rows; ++row)
         {
-            mapInfo[i][j] = readMapDate[i][j];
+            for (int col = 0; col < cols; ++col)
+            {
+                mapInfo[row][col] = 1;
+            }
         }
     }
- 
 }
+   
+ 
 
 Map::~Map()
 {
@@ -55,9 +58,11 @@ Map::~Map()
         delete[] mapInfo[i];
     }
     delete[] mapInfo;
+    mapInfo = nullptr;
 }
 
 int& Map::at(int y, int x)
+
 {
     return mapInfo[y][x];
 }
@@ -79,6 +84,47 @@ int** Map::GenerateMap(string mapName)
     }
 
     if (!in.is_open()) 
+    {
+        int col = 0;
+        for (int row = 0; row < mapData.size(); ++row)
+        {
+            array[row][col] = 0;
+        }
+        col++;
+        return array;
+    }
+    else
+    {
+        while (getline(in, mapData))
+        {
+            int col = 0;
+            for (int row = 0; row < mapData.size(); ++row)
+            {
+                array[row][col] = mapData[row];
+            }
+            col++;
+        }
+        return array;
+    }
+}
+
+//사용 보류
+int** Map::GenerateMap2(string mapName)
+{
+    // 파일 읽기 준비
+    ifstream in(mapName + ".txt");
+
+    string mapData;
+    int rows = 100;
+    int cols = 50;
+
+    int** array = new int* [rows];
+    for (int i = 0; i < rows; ++i)
+    {
+        array[i] = new int[cols];
+    }
+
+    if (!in.is_open())
     {
         int col = 0;
         for (int row = 0; row < mapData.size(); ++row)

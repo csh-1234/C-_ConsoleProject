@@ -26,6 +26,46 @@ enum class EGameObject
     PORTAL = 9,
 };
 
+class ConsoleBuffer2 {
+private:
+    HANDLE hConsole;
+
+public:
+    ConsoleBuffer2() 
+    {
+        hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    }
+
+    void DrawWindow(int startX, int startY, int endX, int endY, const std::wstring& title = L"") {
+        // 창 테두리 그리기
+        DrawAt(startX, startY, L"┏" + std::wstring(endX - startX - 1, L'━') + L"┓");
+        for (int y = startY + 1; y < endY; y++) {
+            DrawAt(startX, y, L"┃");
+            DrawAt(endX, y, L"┃");  
+        }
+        DrawAt(startX, endY, L"┗" + std::wstring(endX - startX - 1, L'━') + L"┛");
+
+        // 제목 그리기 (있는 경우)
+        if (!title.empty()) {
+            //int titleX = startX + (endX - startX - title.length()) / 2;
+            int titleX = startX + 5;
+            DrawAt(titleX, startY, title);
+        }
+
+        // 창 내부 지우기
+        for (int y = startY + 1; y < endY; y++) {
+            DrawAt(startX + 1, y, std::wstring(endX - startX - 1, L' '));
+        }
+    }
+
+    void DrawAt(int x, int y, const std::wstring& str) 
+    {
+        COORD pos = { (SHORT)x, (SHORT)y };
+        DWORD written;
+        WriteConsoleOutputCharacterW(hConsole, str.c_str(), str.length(), pos, &written);
+    }
+};
+
 class ConsoleBuffer {
 private:
     std::vector<std::vector<wchar_t>> buffer;  // 와이드 문자열 사용
@@ -68,6 +108,60 @@ public:
             WriteConsoleOutputCharacterW(hConsole, row.data(), width, topLeft, &written);  // 유니코드 버전 사용
             topLeft.Y++;
         }
+    }
+    void RenderPartial(int startX, int startY, int endX, int endY) {
+        COORD topLeft = { (SHORT)startX, (SHORT)startY };
+        DWORD written;
+
+        for (int y = startY; y <= endY && y < height; ++y) {
+            if (y >= 0) {
+                WriteConsoleOutputCharacterW(hConsole, &buffer[y][startX], endX - startX + 1, topLeft, &written);
+            }
+            topLeft.Y++;
+        }
+    }
+
+    void DrawPopup(int x, int y, int w, int h, const std::wstring& title, const std::vector<std::wstring>& content) {
+        // 팝업 영역의 현재 내용을 저장
+        std::vector<std::vector<wchar_t>> background(h, std::vector<wchar_t>(w));
+        for (int i = 0; i < h; ++i) {
+            for (int j = 0; j < w; ++j) {
+                if (y + i < height && x + j < width) {
+                    background[i][j] = buffer[y + i][x + j];
+                }
+            }
+        }
+
+        // 팝업 테두리 그리기
+        DrawAt(x, y, L"┌" + std::wstring(w - 2, L'─') + L"┐");
+        for (int i = 1; i < h - 1; ++i) {
+            DrawAt(x, y + i, L"│" + std::wstring(w - 2, L' ') + L"│");
+        }
+        DrawAt(x, y + h - 1, L"└" + std::wstring(w - 2, L'─') + L"┘");
+
+        // 제목 그리기
+        if (!title.empty()) {
+            DrawAt(x + (w - title.length()) / 2, y, title);
+        }
+
+        // 내용 그리기
+        for (size_t i = 0; i < content.size() && i < h - 2; ++i) {
+            DrawAt(x + 1, y + i + 1, content[i]);
+        }
+
+        // 배경과 팝업을 블렌딩
+        for (int i = 0; i < h; ++i) {
+            for (int j = 0; j < w; ++j) {
+                if (y + i < height && x + j < width) {
+                    if (buffer[y + i][x + j] == L' ' && background[i][j] != L' ') {
+                        buffer[y + i][x + j] = background[i][j];
+                    }
+                }
+            }
+        }
+
+        // 팝업 영역만 렌더링
+        RenderPartial(x, y, x + w - 1, y + h - 1);
     }
 };
 
@@ -1110,6 +1204,8 @@ void PrintBattleUI2()
     std::cout << "┗━━━━━━━━━━━━━━━━━━━━━━┛";
 }
 
+
+
 int main()
 {
     setlocale(LC_ALL, "korean");
@@ -1123,21 +1219,27 @@ int main()
     manager.map.LoadMap(eMaps::Village);
 
     //ConsoleBuffer buffer(200, 200);
-
-
-    Map* currentmap;
+    ConsoleBuffer buffer(50, 25 );  // 콘솔 크기를 설정했습니다
+    ConsoleBuffer2 buffer2;
+    ConsoleBuffer2 buffer3;
     while (true)
     {
         clearScreen();
         manager.input.Update();
-        currentmap = manager.map.GetCurrentMap();
-        DrawBuffer2(currentmap);
-        renderBuffer2(currentmap);
-        MovePlayer(currentmap);
+        DrawBuffer2(manager.map.GetCurrentMap());
+        MovePlayer(manager.map.GetCurrentMap());
+        renderBuffer2(manager.map.GetCurrentMap());
+
+        if (manager.input.GetKeyDown(eKeyCode::I))
+        {
+            buffer2.DrawWindow(5,5, 60, 20);
+            inputAnyKey();
+
+        }
         
-        printRightUI();
+       /* printRightUI();
         printUserInfo();
-        PrintKeyboardState();
+        PrintKeyboardState();*/
         clearScreen();
     }
 }
