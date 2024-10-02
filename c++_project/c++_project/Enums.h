@@ -38,3 +38,17 @@ enum EquipmentType
 	Armor,
 };
 
+enum class EGameObject
+{
+	EMPTY = 0,
+	WALL = 1,
+	PLAYER = 2,
+	TREE1 = 3,
+	TREE2 = 4,
+	MONSTER = 5,
+	BOSSMONSTER = 6,
+	NPC = 7,
+	TILE1 = 8,
+	PORTAL = 9,
+};
+

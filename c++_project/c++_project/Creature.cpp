@@ -1,5 +1,7 @@
 #include "Creature.h"
-#include <iostream>
+#include "Skill.h"
+#include "IPotion.h"
+#include "Enums.h"
 using namespace std;
 
 Creature::Creature(int unitType) :_name(""), _unitType(unitType), _maxHp(0), _hp(0), _maxMp(0), _mp(0), _atk(0), _def(0), _criRate(0),
@@ -120,20 +122,45 @@ void Creature::SetPosY(int inputPosY)
 	_posY = inputPosY;
 }
 
+void Creature::addActiveSkill(Skill* skill)
+{
+	_ActiveSkillList.push_back(skill);
+}
+void Creature::addPasiveSkill(Skill* skill)
+{
+	_PassiveSkillList.push_back(skill);
+}
+vector<Skill*> Creature::getActiveSkillList()
+{
+	return _ActiveSkillList;
+}
+void Creature::addPotion(IPotion* potion, int count)
+{
+	if (_PotionList.size() != 0)
+	{
+		for (size_t i = 0; i < _PotionList.size(); i++)
+		{
+			if (_PotionList[i] == potion)
+			{
+				potion->setItemQuantity(count);
+				return;
+			}
+			else
+			{
+				_PotionList.push_back(potion);
+				return;
+			}
+		}
+	}
+	else
+	{
+		_PotionList.push_back(potion);
+	}
+	
+}
+vector<IPotion*> Creature::getPotionlList()
+{
+	return _PotionList;
+}
 #pragma endregion
 
-void Creature::PrintUnit()
-{
-	cout << "==========유닛 정보==========" << endl;
-	cout << "이름 : " << _name << endl;
-	cout << "체력/최대체력 : " << _hp << " / " << _maxHp << endl;
-	cout << "마나/최대마나 : " << _mp << " / " << _maxMp << endl;
-	cout << "공격력 : " << _atk << endl;
-	cout << "방어력 : " << _def << endl;
-	cout << "크리티컬 확률 : " << _criRate << "" << endl;
-	cout << "크리티컬 데미지 : " << _criDamage << endl;
-	cout << "회피율 : " << _avoidRate << "%" << endl;
-	cout << "속도 : " << _speed << endl;
-	cout << "소지금 : " << _money << "골드" << endl;
-	cout << "============================" << endl;
-}

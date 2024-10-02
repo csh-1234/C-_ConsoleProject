@@ -1,27 +1,20 @@
 #include "Skill.h"
 
 Skill::Skill() :_skillLevel(0), _skillName(""), _skillType(0), _skillCost(0), _skillInfo(""), _isActivate(false) { }
-
-Skill::~Skill()
+Skill::~Skill(){}
+string Skill::getSkillName()
 {
+	return _skillName;
 }
-
-#pragma region property
-string Skill::GetSkillName()
-{
-	return string();
-}
-int Skill::GetSkillType()
+int Skill::getSkillType()
 {
 	return _skillType;
 }
-int Skill::GetSkillCost()
+int Skill::getSkillCost()
 {
 	return _skillCost;
 }
-bool Skill::GetIsActivate()
+bool Skill::getIsActivate()
 {
 	return _isActivate;
 }
-#pragma endregion
-

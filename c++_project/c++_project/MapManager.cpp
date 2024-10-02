@@ -35,6 +35,22 @@ void MapManager::Initialize()
     p2.PlayerStartPos = make_pair(23, 23);
     PortalList.push_back(p2);
 
+    PortalInfo p3 = {};
+    p3.CurrentMap = eMaps::Dungeon_1;
+    p3.PortalPos.first = 4;
+    p3.PortalPos.second = 2;
+    p3.NextMap = eMaps::Dungeon_2;
+    p3.PlayerStartPos = make_pair(31, 33);
+    PortalList.push_back(p3);
+
+    PortalInfo p4 = {};
+    p3.CurrentMap = eMaps::Dungeon_2;
+    p3.PortalPos.first = 34;
+    p3.PortalPos.second = 31;
+    p3.NextMap = eMaps::Dungeon_1;
+    p3.PlayerStartPos = make_pair(2, 5);
+    PortalList.push_back(p3);
+
 }
 
 void MapManager::Update()

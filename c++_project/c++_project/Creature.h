@@ -1,8 +1,12 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <map>
+
 using namespace std;
 
+class Skill;
+class IPotion;
 
 class Creature
 {
@@ -38,17 +42,14 @@ public:
 	void SetPosX(int inputPosX);
 	int GetPosY()const;
 	void SetPosY(int inputPosY);
-	void PrintUnit();
 #pragma endregion
 #pragma region CommonMethod
-	//void addActiveSkill(Skill* skill)
-	//{
-	//	_ActiveSkillList.push_back(skill);
-	//}
-	//void addPasiveSkill(Skill* skill)
-	//{
-	//	_PassiveSkillList.push_back(skill);
-	//}
+	void addActiveSkill(Skill* skill);
+	void addPasiveSkill(Skill* skill);
+	vector<Skill*> getActiveSkillList();
+	void addPotion(IPotion* potion, int count);
+	vector<IPotion*> getPotionlList();
+	
 #pragma endregion
 
 protected:
@@ -67,7 +68,8 @@ protected:
 	int _money;			// ¼ÒÁö±Ý
 	int _posX;
 	int _posY;
-	/*vector<Skill*> _ActiveSkillList;
-	vector<Skill*> _PassiveSkillList;*/
+	vector<Skill*> _ActiveSkillList;
+	vector<Skill*> _PassiveSkillList;
+	vector<IPotion*> _PotionList;
 	//vector<Item*> _inventory;
 };

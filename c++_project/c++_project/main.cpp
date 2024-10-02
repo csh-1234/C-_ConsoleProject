@@ -3,7 +3,6 @@
 #include "Manager.h"
 #include <conio.h>
 #include "Player.h"
-#include "Knight.h"
 #include "Monster.h"
 #include <string>
 #include <cwchar>
@@ -171,7 +170,7 @@ const int MAP_HEIGHT = 50;
 const int VIEWPORT_WIDTH = 20;  // 화면에 표시되는 너비
 const int VIEWPORT_HEIGHT = 10; // 화면에 표시되는 높이
 
-Knight* player = new Knight("홍길동");
+Player* player = new Player("홍길동");
 Slime* slime;
 Monster* monster;
 int playerX = player->GetPosX();
