@@ -32,16 +32,16 @@ public:
 	void SetCriRate(int inputCriRate);
 	int GetCriDamage()const;
 	void SetCriDamage(int inputCriDamage);
-	int GetAvoidRate()const;
-	void SetAvoidRate(int inputAvoidRate);
-	int GetSpeed()const;
-	void SetSpeed(int inputSpeed);
 	int GetMoney()const;
 	void SetMoney(int inputMoney);
 	int GetPosX()const;
 	void SetPosX(int inputPosX);
 	int GetPosY()const;
 	void SetPosY(int inputPosY);
+	int GetExp()const;
+	void SetExp(int inputExp);
+	int GetLevel()const;
+	void SetLevel(int inputLevel);
 #pragma endregion
 #pragma region CommonMethod
 	void addActiveSkill(Skill* skill);
@@ -49,7 +49,7 @@ public:
 	vector<Skill*> getActiveSkillList();
 	void addPotion(IPotion* potion, int count);
 	vector<IPotion*> getPotionlList();
-	
+
 #pragma endregion
 
 protected:
@@ -63,11 +63,11 @@ protected:
 	int _def;			// 기본 방어력
 	int _criRate;		// 기본 크리티컬 확률
 	float _criDamage;	// 기본 크리티컬 데미지
-	int _avoidRate;		// 기본 회피율
-	int _speed;			// 기본 속도
 	int _money;			// 소지금
-	int _posX;
-	int _posY;
+	int _posX;			// 좌표X
+	int _posY;			// 좌표Y
+	int _exp;			// 경험치
+	int _level;			// 레벨
 	vector<Skill*> _ActiveSkillList;
 	vector<Skill*> _PassiveSkillList;
 	vector<IPotion*> _PotionList;

@@ -23,62 +23,57 @@
     <Filter Include="Map">
       <UniqueIdentifier>{c2436f51-cc6c-47e2-99e8-08c3ba7f3acd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{f3c1b2a2-0559-43f2-bfea-fd6fa05c6bff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="Creature.cpp">
       <Filter>Creature</Filter>
     </ClCompile>
-    <ClCompile Include="소스3.cpp" />
     <ClCompile Include="Player.cpp">
-      <Filter>Creature\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Knight.cpp">
       <Filter>Creature\Player</Filter>
     </ClCompile>
     <ClCompile Include="Skill.cpp">
       <Filter>Skill</Filter>
     </ClCompile>
-    <ClCompile Include="소스4.cpp" />
-    <ClCompile Include="mpatest.cpp" />
-    <ClCompile Include="소스5.cpp" />
-    <ClCompile Include="소스6.cpp" />
-    <ClCompile Include="maptest2.cpp" />
     <ClCompile Include="Map.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="소스.cpp" />
     <ClCompile Include="Manager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="MapManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="소스1.cpp" />
     <ClCompile Include="Monster.cpp">
       <Filter>Creature\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="소스2.cpp" />
-    <ClCompile Include="소스7.cpp" />
-    <ClCompile Include="소스8.cpp" />
+    <ClCompile Include="FireBall.cpp">
+      <Filter>Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Heal.cpp">
+      <Filter>Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Meteor.cpp">
+      <Filter>Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleDraw.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="IPotion.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="Manager.h">
@@ -89,9 +84,6 @@
     </ClInclude>
     <ClInclude Include="Enums.h" />
     <ClInclude Include="Player.h">
-      <Filter>Creature\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Knight.h">
       <Filter>Creature\Player</Filter>
     </ClInclude>
     <ClInclude Include="Skill.h">
@@ -105,6 +97,24 @@
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Creature\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="FireBall.h">
+      <Filter>Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Heal.h">
+      <Filter>Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Meteor.h">
+      <Filter>Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleDraw.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="IPotion.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

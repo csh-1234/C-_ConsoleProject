@@ -24,32 +24,43 @@ void MapManager::Initialize()
     p.PortalPos.first = 22;
     p.PortalPos.second = 21;
     p.NextMap = eMaps::Dungeon_1;
-    p.PlayerStartPos = make_pair(2, 3);
+    p.PlayerStartPos = make_pair(13, 12);
     PortalList.push_back(p);
 
     PortalInfo p2 = {};
     p2.CurrentMap = eMaps::Dungeon_1;
-    p2.PortalPos.first = 2;
-    p2.PortalPos.second = 2;
+    p2.PortalPos.first = 11;
+    p2.PortalPos.second = 13;
     p2.NextMap = eMaps::Village;
-    p2.PlayerStartPos = make_pair(23, 23);
+    p2.PlayerStartPos = make_pair(21, 23);
     PortalList.push_back(p2);
 
     PortalInfo p3 = {};
     p3.CurrentMap = eMaps::Dungeon_1;
-    p3.PortalPos.first = 4;
-    p3.PortalPos.second = 2;
-    p3.NextMap = eMaps::Dungeon_2;
+    p3.PortalPos.first = 13;
+    p3.PortalPos.second = 13;
+    p3.NextMap = eMaps::BossRoom;
     p3.PlayerStartPos = make_pair(31, 33);
     PortalList.push_back(p3);
 
     PortalInfo p4 = {};
-    p3.CurrentMap = eMaps::Dungeon_2;
-    p3.PortalPos.first = 34;
-    p3.PortalPos.second = 31;
-    p3.NextMap = eMaps::Dungeon_1;
-    p3.PlayerStartPos = make_pair(2, 5);
-    PortalList.push_back(p3);
+    p4.CurrentMap = eMaps::Dungeon_1;
+    p4.PortalPos.first = 33;
+    p4.PortalPos.second = 85;
+    p4.NextMap = eMaps::BossRoom;
+    p4.PlayerStartPos = make_pair(31, 33);
+    PortalList.push_back(p4);
+
+    PortalInfo p5 = {};
+    p5.CurrentMap = eMaps::BossRoom;
+    p5.PortalPos.first = 34;
+    p5.PortalPos.second = 31;
+    p5.NextMap = eMaps::Dungeon_1;
+    p5.PlayerStartPos = make_pair(13, 12);
+    PortalList.push_back(p5);
+
+ 
+
 
 }
 

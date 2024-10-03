@@ -12,7 +12,7 @@ public:
 	int** GenerateMap2(string mapName);
 	string GetMapName();
 
-	
+
 private:
 	int** mapInfo;
 	string mapName;

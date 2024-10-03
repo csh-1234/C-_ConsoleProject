@@ -3,16 +3,8 @@
 #include "Map.h"
 #include <map>
 #include <vector>
+#include "Enums.h"
 
-enum class eMaps
-{
-	Village,
-	Dungeon_1,
-	Dungeon_2,
-	BossRoom,
-	test,
-	None,	// 항상 맨끝에 둘 것.(개수 파악용)
-};
 
 class MapManager
 {

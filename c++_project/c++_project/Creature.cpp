@@ -5,7 +5,7 @@
 using namespace std;
 
 Creature::Creature(int unitType) :_name(""), _unitType(unitType), _maxHp(0), _hp(0), _maxMp(0), _mp(0), _atk(0), _def(0), _criRate(0),
-	_criDamage(0), _avoidRate(0), _speed(0), _money(0), _posX(1), _posY(1) {}
+_criDamage(0), _money(0), _posX(1), _posY(1), _exp(0), _level(0) {}
 Creature::~Creature() {}
 
 #pragma region Property
@@ -81,22 +81,6 @@ void Creature::SetCriDamage(int inputCriDamage)
 {
 	_criDamage = inputCriDamage;
 }
-int Creature::GetAvoidRate() const
-{
-	return _avoidRate;
-}
-void Creature::SetAvoidRate(int inputAvoidRate)
-{
-	_avoidRate = inputAvoidRate;
-}
-int Creature::GetSpeed() const
-{
-	return _speed;
-}
-void Creature::SetSpeed(int inputSpeed)
-{
-	_speed = inputSpeed;
-}
 int Creature::GetMoney() const
 {
 	return _money;
@@ -120,6 +104,26 @@ int Creature::GetPosY() const
 void Creature::SetPosY(int inputPosY)
 {
 	_posY = inputPosY;
+}
+
+int Creature::GetExp() const
+{
+	return _exp;
+}
+
+void Creature::SetExp(int inputExp)
+{
+	_exp += inputExp;
+}
+
+int Creature::GetLevel() const
+{
+	return _level;
+}
+
+void Creature::SetLevel(int inputLevel)
+{
+	_level = inputLevel;
 }
 
 void Creature::addActiveSkill(Skill* skill)
@@ -156,7 +160,7 @@ void Creature::addPotion(IPotion* potion, int count)
 	{
 		_PotionList.push_back(potion);
 	}
-	
+
 }
 vector<IPotion*> Creature::getPotionlList()
 {

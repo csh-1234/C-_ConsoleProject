@@ -1,6 +1,5 @@
 #pragma once
 #include "InputManager.h"
-#include "GameManager.h"
 #include "MapManager.h"
 #include "ConsoleDraw.h"
 #include <iostream>
@@ -10,7 +9,6 @@ public:
     ~Manager() {}
 
     InputManager& input = InputManager::getInstance();
-    GameManager& game = GameManager::getInstance();
     MapManager& map = MapManager::getInstance();
     //TimeManager& time = TimeManager::getInstance();
 

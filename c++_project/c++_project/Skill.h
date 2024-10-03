@@ -6,7 +6,7 @@ using namespace std;
 class Creature;
 class Skill
 {
-public:	
+public:
 	Skill();
 	~Skill();
 
@@ -15,11 +15,14 @@ public:
 	virtual void BuffSkillCast(Creature* Caster) {};
 #pragma region Property
 	string getSkillName();
+	int getSkillLevel();
 	int getSkillType();
 	int getSkillCost();
+	string gertSkillInfo();
 	bool getIsActivate();
+	void setSkillLevel(int inputLevel);
 #pragma endregion
-	
+
 protected:
 	int _skillLevel;
 	string _skillName;

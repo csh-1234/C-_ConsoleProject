@@ -24,6 +24,10 @@ public:
 	{
 		return _itemQuantity;
 	}
+	int getItemPrice()
+	{
+		return _itemPrice;
+	}
 	void setItemQuantity()
 	{
 		_itemQuantity--;

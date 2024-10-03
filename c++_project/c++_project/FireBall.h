@@ -6,7 +6,7 @@ class Creature;
 class FireBall : public Skill
 {
 public:
-	FireBall() : Skill() 
+	FireBall() : Skill()
 	{
 		_skillLevel = 1;
 		_skillName = "파이어볼";
@@ -17,6 +17,6 @@ public:
 	~FireBall();
 
 	vector<wstring> ActiveSkillCast(Creature* Caster, Creature* Target);
-	
-	
+
+
 };

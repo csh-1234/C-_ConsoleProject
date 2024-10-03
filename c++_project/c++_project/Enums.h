@@ -11,7 +11,8 @@ enum class MonsterType
 	SLIME = 0,
 	GOBLIN = 1,
 	SKELETON = 2,
-	NONE = 3,
+	INVISIBLEDRAGON = 3,
+	NONE = 4,
 };
 enum UnitType
 {
@@ -52,3 +53,12 @@ enum class EGameObject
 	PORTAL = 9,
 };
 
+enum class eMaps
+{
+	Village,
+	Dungeon_1,
+	Dungeon_2,
+	BossRoom,
+	test,
+	None,	// 항상 맨끝에 둘 것.(개수 파악용)
+};

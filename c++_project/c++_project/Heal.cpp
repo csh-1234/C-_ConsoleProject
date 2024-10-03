@@ -10,7 +10,7 @@ vector<wstring> Heal::ActiveSkillCast(Creature* Caster, Creature* TarGet)
 {
 	vector<wstring> SkillMessage;
 	string casterName = Caster->GetName();
-	
+
 
 	if (Caster->GetMaxHp() < Caster->GetHp() + _skillLevel * 10)
 	{

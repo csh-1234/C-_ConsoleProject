@@ -11,9 +11,9 @@ Player::Player(string playerName) : Creature(PLAYER)
 	_def = 5;					// 기본 방어력
 	_criRate = 10;				// 기본 크리티컬 확률
 	_criDamage = 150;			// 기본 크리티컬 데미지
-	_avoidRate = 10;			// 기본 회피율
-	_speed = 10;				// 기본 속도
 	_money = 10000;				// 소지금
+	_exp = 0;
+	_level = 1;
 }
 
 Player::~Player()

@@ -48,8 +48,6 @@ Map::Map(const string inputName) : mapName(inputName)
         }
     }
 }
-   
- 
 
 Map::~Map()
 {
@@ -83,7 +81,7 @@ int** Map::GenerateMap(string mapName)
         array[i] = new int[cols];
     }
 
-    if (!in.is_open()) 
+    if (!in.is_open())
     {
         int col = 0;
         for (int row = 0; row < mapData.size(); ++row)
