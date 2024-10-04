@@ -26,7 +26,8 @@ C++의 다양한 기능과 객체지향 언어의 특징을 살려 게임을 만
 
 ## 4. 게임 플로우 차트
 
-![test](https://github.com/user-attachments/assets/7245b19d-ff55-4704-ac5b-f521b271759d)
+![idcflowchart](https://github.com/user-attachments/assets/a6151ea3-c4f6-4304-a170-474fb7980722)
+
 
 ## 5. 기능 구현
 
