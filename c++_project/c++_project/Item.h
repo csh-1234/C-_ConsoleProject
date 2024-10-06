@@ -7,41 +7,20 @@ class Creature;
 class Item
 {
 public:
-	Item() : _itemName(""), _itemType(0), _itemQuantity(0), _itemPrice(0) {}
-	~Item() {}
+	Item();
+	~Item();
 
-	
+	string getItemName();
+	int getItemType();
+	int getItemQuantity();
+	int getItemPrice();
+	void setItemQuantity();
+	void setItemQuantity(int quantity);
 
-	string getItemName()
-	{
-		return _itemName;
-	}
-	int getItemType()
-	{
-		return _itemType;
-	}
-	int getItemQuantity()
-	{
-		return _itemQuantity;
-	}
-	int getItemPrice()
-	{
-		return _itemPrice;
-	}
-	void setItemQuantity()
-	{
-		_itemQuantity--;
-	}
-	void setItemQuantity(int quantity)
-	{
-		_itemQuantity += quantity;
-	}
 	//virtual void UseItem(Creature* Caster) {};
-
 protected:
 	string _itemName;
 	int _itemType;
 	int _itemQuantity;
 	int _itemPrice;
-
 };

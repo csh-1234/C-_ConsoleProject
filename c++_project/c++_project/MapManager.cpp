@@ -58,10 +58,6 @@ void MapManager::Initialize()
     p5.NextMap = eMaps::Dungeon_1;
     p5.PlayerStartPos = make_pair(13, 12);
     PortalList.push_back(p5);
-
- 
-
-
 }
 
 void MapManager::Update()

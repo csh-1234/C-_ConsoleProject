@@ -14,7 +14,6 @@ Map::Map(const string inputName) : mapName(inputName)
     }
 
     ifstream in(mapName + ".txt");
-
     string mapData;
 
     if (!in.is_open())
@@ -151,9 +150,3 @@ string Map::GetMapName()
 {
     return mapName;
 }
-
-
-
-
-
-

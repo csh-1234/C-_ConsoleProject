@@ -25,7 +25,7 @@ void InputManager::allocateKeys()
 	for (int i = 0; i < (int)eKeyCode::Nothing; i++)
 	{
 		Key key = {};
-		key.isPressed = false;
+		key.isPressed = false;	
 		key.state = eKeyState::None;
 		key.keyCode = (eKeyCode)i;
 

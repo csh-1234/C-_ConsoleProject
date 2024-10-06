@@ -6,10 +6,7 @@ class Creature;
 class IPotion : public Item
 {
 public:
-	IPotion() :Item(), P_hpRecoverAmount(0), P_mpRecoverAmount(0) 
-	{
-		
-	}
+	IPotion() :Item(), P_hpRecoverAmount(0), P_mpRecoverAmount(0) {}
 	virtual ~IPotion() {}
 	virtual std::vector<wstring> UsePotion(Creature* Caster) { return potionTextBuffer; }
 
@@ -32,7 +29,6 @@ public:
 		P_hpRecoverAmount = 100;
 	}
 	~HalthIPotion() {}
-
 	
 	vector<wstring> UsePotion(Creature* Caster);
 	

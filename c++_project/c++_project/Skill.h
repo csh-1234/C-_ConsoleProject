@@ -13,7 +13,7 @@ public:
 	virtual std::vector<wstring> ActiveSkillCast(Creature* Attacker, Creature* Defender) { return skillTextBuffer; }
 	virtual void PassiveSkillCast(Creature* Caster) {};
 	virtual void BuffSkillCast(Creature* Caster) {};
-#pragma region Property
+	#pragma region Property
 	string getSkillName();
 	int getSkillLevel();
 	int getSkillType();
