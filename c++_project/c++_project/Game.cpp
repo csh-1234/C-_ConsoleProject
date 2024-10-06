@@ -788,6 +788,7 @@ void Game::MovePlayer(Map* currentMap)
         case (int)EGameObject::MONSTER:
         {
             //31 14 
+            system("cls");
             Manager& manager = Manager::getInstance();
             if (manager.map.GetcurrenteMap() == eMaps::BossRoom && newPosX == 31 && newPosY == 14)
             {
@@ -929,6 +930,7 @@ void Game::MovePlayer(Map* currentMap)
                                 if (monster->GetMonsterType() == MonsterType::SLIME) DrawSlimeImage(consoleDrawBuffer);
                                 else if (monster->GetMonsterType() == MonsterType::GOBLIN) DrawGoblinImage(consoleDrawBuffer);
                                 else if (monster->GetMonsterType() == MonsterType::SKELETON) DrawSkeletonImage(consoleDrawBuffer);
+                                else if (monster->GetMonsterType() == MonsterType::INVISIBLEDRAGON)DrawInvisableDragonImage(consoleDrawBuffer);
                                 DrawBattleChoiceSkill(consoleDrawBuffer);
                                 printUserInfo(consoleDrawBuffer);
 
@@ -1155,6 +1157,7 @@ void Game::MovePlayer(Map* currentMap)
                                 if (monster->GetMonsterType() == MonsterType::SLIME) DrawSlimeImage(consoleDrawBuffer);
                                 else if (monster->GetMonsterType() == MonsterType::GOBLIN) DrawGoblinImage(consoleDrawBuffer);
                                 else if (monster->GetMonsterType() == MonsterType::SKELETON) DrawSkeletonImage(consoleDrawBuffer);
+                                else if (monster->GetMonsterType() == MonsterType::INVISIBLEDRAGON)DrawInvisableDragonImage(consoleDrawBuffer);
                                 DrawBattleChoiceInven(consoleDrawBuffer);
                                 printUserInfo(consoleDrawBuffer);
                                 if (itemNum == 0)

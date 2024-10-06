@@ -60,197 +60,187 @@ void ConsolePopup::DrawUserInfo(int startX, int startY, int endX, int endY, cons
 
 void ConsolePopup::DrawUserInventory(int startX, int startY, int endX, int endY, const std::wstring& title, Player* player)
 {
+    DrawAt(startX, startY, L"¦®" + std::wstring(endX - startX - 1, L'¦¬') + L"¦¯");
+    for (int y = startY + 1; y < endY; y++)
     {
-        DrawAt(startX, startY, L"¦®" + std::wstring(endX - startX - 1, L'¦¬') + L"¦¯");
-        for (int y = startY + 1; y < endY; y++)
-        {
-            DrawAt(startX, y, L"¦­");
-            DrawAt(endX, y, L"¦­");
-        }
-        DrawAt(startX, endY, L"¦±" + std::wstring(endX - startX - 1, L'¦¬') + L"¦°");
-
-        if (!title.empty())
-        {
-            int titleX = startX + (endX - startX - title.length()) / 2 - 4;
-            DrawAt(titleX, startY, title);
-        }
-
-        for (int y = startY + 1; y < endY; y++)
-        {
-            DrawAt(startX + 1, y, std::wstring(endX - startX - 1, L' '));
-        }
-        Manager& manager = Manager::getInstance();
-
-        wstring wstr(player->getPotionlList()[0]->getItemName().size(), L'\0');
-        std::mbstowcs(&wstr[0], player->getPotionlList()[0]->getItemName().c_str()
-            , player->getPotionlList()[0]->getItemName().size());
-        DrawAt(startX + 4, startY + 2, wstr + L" : " + to_wstring(player->getPotionlList()[0]->getItemQuantity()) + L" °³");
-
-        wstring wstr2(player->getPotionlList()[1]->getItemName().size(), L'\0');
-        std::mbstowcs(&wstr2[0], player->getPotionlList()[1]->getItemName().c_str()
-            , player->getPotionlList()[1]->getItemName().size());
-        DrawAt(startX + 4, startY + 3, wstr2 + L" : " + to_wstring(player->getPotionlList()[1]->getItemQuantity()) + L" °³");
-
-        wstring wstr3(player->getPotionlList()[2]->getItemName().size(), L'\0');
-        std::mbstowcs(&wstr3[0], player->getPotionlList()[2]->getItemName().c_str()
-            , player->getPotionlList()[2]->getItemName().size());
-        DrawAt(startX + 4, startY + 4, wstr3 + L" : " + to_wstring(player->getPotionlList()[2]->getItemQuantity()) + L" °³");
-
-        DrawAt(startX + 4, startY + 8, L"¼ÒÁö±Ý : " + to_wstring(player->GetMoney()) + L"°ñµå");
+        DrawAt(startX, y, L"¦­");
+        DrawAt(endX, y, L"¦­");
     }
+    DrawAt(startX, endY, L"¦±" + std::wstring(endX - startX - 1, L'¦¬') + L"¦°");
+    
+    if (!title.empty())
+    {
+        int titleX = startX + (endX - startX - title.length()) / 2 - 4;
+        DrawAt(titleX, startY, title);
+    }
+    
+    for (int y = startY + 1; y < endY; y++)
+    {
+        DrawAt(startX + 1, y, std::wstring(endX - startX - 1, L' '));
+    }
+    Manager& manager = Manager::getInstance();
+    
+    wstring wstr(player->getPotionlList()[0]->getItemName().size(), L'\0');
+    std::mbstowcs(&wstr[0], player->getPotionlList()[0]->getItemName().c_str()
+        , player->getPotionlList()[0]->getItemName().size());
+    DrawAt(startX + 4, startY + 2, wstr + L" : " + to_wstring(player->getPotionlList()[0]->getItemQuantity()) + L" °³");
+    
+    wstring wstr2(player->getPotionlList()[1]->getItemName().size(), L'\0');
+    std::mbstowcs(&wstr2[0], player->getPotionlList()[1]->getItemName().c_str()
+        , player->getPotionlList()[1]->getItemName().size());
+    DrawAt(startX + 4, startY + 3, wstr2 + L" : " + to_wstring(player->getPotionlList()[1]->getItemQuantity()) + L" °³");
+    
+    wstring wstr3(player->getPotionlList()[2]->getItemName().size(), L'\0');
+    std::mbstowcs(&wstr3[0], player->getPotionlList()[2]->getItemName().c_str()
+        , player->getPotionlList()[2]->getItemName().size());
+    DrawAt(startX + 4, startY + 4, wstr3 + L" : " + to_wstring(player->getPotionlList()[2]->getItemQuantity()) + L" °³");
+    
+    DrawAt(startX + 4, startY + 8, L"¼ÒÁö±Ý : " + to_wstring(player->GetMoney()) + L"°ñµå");
 }
 
 void ConsolePopup::DrawUserSkill(int startX, int startY, int endX, int endY, const std::wstring& title, Player* player)
-{
+{    
+    DrawAt(startX, startY, L"¦®" + std::wstring(endX - startX - 1, L'¦¬') + L"¦¯");
+    for (int y = startY + 1; y < endY; y++)
     {
-        DrawAt(startX, startY, L"¦®" + std::wstring(endX - startX - 1, L'¦¬') + L"¦¯");
-        for (int y = startY + 1; y < endY; y++)
-        {
-            DrawAt(startX, y, L"¦­");
-            DrawAt(endX, y, L"¦­");
-        }
-        DrawAt(startX, endY, L"¦±" + std::wstring(endX - startX - 1, L'¦¬') + L"¦°");
-
-        if (!title.empty())
-        {
-            int titleX = startX + (endX - startX - title.length()) / 2 - 4;
-            DrawAt(titleX, startY, title);
-        }
-
-        for (int y = startY + 1; y < endY; y++)
-        {
-            DrawAt(startX + 1, y, std::wstring(endX - startX - 1, L' '));
-        }
-        Manager& manager = Manager::getInstance();
-
-        wstring wstr(player->getActiveSkillList()[0]->getSkillName().size(), L'\0');
-        std::mbstowcs(&wstr[0], player->getActiveSkillList()[0]->getSkillName().c_str()
-            , player->getActiveSkillList()[0]->getSkillName().size());
-        wstring wstr2(player->getActiveSkillList()[0]->gertSkillInfo().size(), L'\0');
-        std::mbstowcs(&wstr2[0], player->getActiveSkillList()[0]->gertSkillInfo().c_str()
-            , player->getActiveSkillList()[0]->gertSkillInfo().size());
-        DrawAt(startX + 4, startY + 2, L" LV : " + to_wstring(player->getActiveSkillList()[0]->getSkillLevel()) + L"  " + wstr);
-        DrawAt(startX + 4, startY + 3, L" " + wstr2);
-
-        wstring wstr3(player->getActiveSkillList()[1]->getSkillName().size(), L'\0');
-        std::mbstowcs(&wstr3[0], player->getActiveSkillList()[1]->getSkillName().c_str()
-            , player->getActiveSkillList()[1]->getSkillName().size());
-        wstring wstr4(player->getActiveSkillList()[1]->gertSkillInfo().size(), L'\0');
-        std::mbstowcs(&wstr4[0], player->getActiveSkillList()[1]->gertSkillInfo().c_str()
-            , player->getActiveSkillList()[1]->gertSkillInfo().size());
-        DrawAt(startX + 4, startY + 5, L" LV : " + to_wstring(player->getActiveSkillList()[0]->getSkillLevel()) + L"  " + wstr3);
-        DrawAt(startX + 4, startY + 6, L" " + wstr4);
-
-        wstring wstr5(player->getActiveSkillList()[2]->getSkillName().size(), L'\0');
-        std::mbstowcs(&wstr5[0], player->getActiveSkillList()[2]->getSkillName().c_str()
-            , player->getActiveSkillList()[2]->getSkillName().size());
-        wstring wstr6(player->getActiveSkillList()[2]->gertSkillInfo().size(), L'\0');
-        std::mbstowcs(&wstr6[0], player->getActiveSkillList()[2]->gertSkillInfo().c_str()
-            , player->getActiveSkillList()[2]->gertSkillInfo().size());
-        DrawAt(startX + 4, startY + 8, L" LV : " + to_wstring(player->getActiveSkillList()[2]->getSkillLevel()) + L"  " + wstr5);
-        DrawAt(startX + 4, startY + 9, L" " + wstr6);
+        DrawAt(startX, y, L"¦­");
+        DrawAt(endX, y, L"¦­");
     }
+    DrawAt(startX, endY, L"¦±" + std::wstring(endX - startX - 1, L'¦¬') + L"¦°");
+    
+    if (!title.empty())
+    {
+        int titleX = startX + (endX - startX - title.length()) / 2 - 4;
+        DrawAt(titleX, startY, title);
+    }
+    
+    for (int y = startY + 1; y < endY; y++)
+    {
+        DrawAt(startX + 1, y, std::wstring(endX - startX - 1, L' '));
+    }
+    Manager& manager = Manager::getInstance();
+    
+    wstring wstr(player->getActiveSkillList()[0]->getSkillName().size(), L'\0');
+    std::mbstowcs(&wstr[0], player->getActiveSkillList()[0]->getSkillName().c_str()
+        , player->getActiveSkillList()[0]->getSkillName().size());
+    wstring wstr2(player->getActiveSkillList()[0]->gertSkillInfo().size(), L'\0');
+    std::mbstowcs(&wstr2[0], player->getActiveSkillList()[0]->gertSkillInfo().c_str()
+        , player->getActiveSkillList()[0]->gertSkillInfo().size());
+    DrawAt(startX + 4, startY + 2, L" LV : " + to_wstring(player->getActiveSkillList()[0]->getSkillLevel()) + L"  " + wstr);
+    DrawAt(startX + 4, startY + 3, L" " + wstr2);
+    
+    wstring wstr3(player->getActiveSkillList()[1]->getSkillName().size(), L'\0');
+    std::mbstowcs(&wstr3[0], player->getActiveSkillList()[1]->getSkillName().c_str()
+        , player->getActiveSkillList()[1]->getSkillName().size());
+    wstring wstr4(player->getActiveSkillList()[1]->gertSkillInfo().size(), L'\0');
+    std::mbstowcs(&wstr4[0], player->getActiveSkillList()[1]->gertSkillInfo().c_str()
+        , player->getActiveSkillList()[1]->gertSkillInfo().size());
+    DrawAt(startX + 4, startY + 5, L" LV : " + to_wstring(player->getActiveSkillList()[0]->getSkillLevel()) + L"  " + wstr3);
+    DrawAt(startX + 4, startY + 6, L" " + wstr4);
+    
+    wstring wstr5(player->getActiveSkillList()[2]->getSkillName().size(), L'\0');
+    std::mbstowcs(&wstr5[0], player->getActiveSkillList()[2]->getSkillName().c_str()
+        , player->getActiveSkillList()[2]->getSkillName().size());
+    wstring wstr6(player->getActiveSkillList()[2]->gertSkillInfo().size(), L'\0');
+    std::mbstowcs(&wstr6[0], player->getActiveSkillList()[2]->gertSkillInfo().c_str()
+        , player->getActiveSkillList()[2]->gertSkillInfo().size());
+    DrawAt(startX + 4, startY + 8, L" LV : " + to_wstring(player->getActiveSkillList()[2]->getSkillLevel()) + L"  " + wstr5);
+    DrawAt(startX + 4, startY + 9, L" " + wstr6);
+    
 }
 
 void ConsolePopup::DrawPotionShop(int startX, int startY, int endX, int endY, const std::wstring& title, Player* player)
 {
+    DrawAt(startX, startY, L"¦®" + std::wstring(endX - startX - 1, L'¦¬') + L"¦¯");
+    for (int y = startY + 1; y < endY; y++)
     {
-        DrawAt(startX, startY, L"¦®" + std::wstring(endX - startX - 1, L'¦¬') + L"¦¯");
-        for (int y = startY + 1; y < endY; y++)
-        {
-            DrawAt(startX, y, L"¦­");
-            DrawAt(endX, y, L"¦­");
-        }
-        DrawAt(startX, endY, L"¦±" + std::wstring(endX - startX - 1, L'¦¬') + L"¦°");
-
-        if (!title.empty())
-        {
-            int titleX = startX + (endX - startX - title.length()) / 2 - 4;
-            DrawAt(titleX, startY, title);
-        }
-
-        for (int y = startY + 1; y < endY; y++)
-        {
-            DrawAt(startX + 1, y, std::wstring(endX - startX - 1, L' '));
-        }
-        Manager& manager = Manager::getInstance();
-
-        wstring wstr(player->getPotionlList()[0]->getItemName().size(), L'\0');
-        std::mbstowcs(&wstr[0], player->getPotionlList()[0]->getItemName().c_str()
-            , player->getPotionlList()[0]->getItemName().size());
-        DrawAt(startX + 4, startY + 2, L"1. " + wstr + L" : " + to_wstring(player->getPotionlList()[0]->getItemPrice()) + L" °ñµå");
-
-        wstring wstr2(player->getPotionlList()[1]->getItemName().size(), L'\0');
-        std::mbstowcs(&wstr2[0], player->getPotionlList()[1]->getItemName().c_str()
-            , player->getPotionlList()[1]->getItemName().size());
-        DrawAt(startX + 4, startY + 3, L"2. " + wstr2 + L" : " + to_wstring(player->getPotionlList()[1]->getItemPrice()) + L" °ñµå");
-
-        wstring wstr3(player->getPotionlList()[2]->getItemName().size(), L'\0');
-        std::mbstowcs(&wstr3[0], player->getPotionlList()[2]->getItemName().c_str()
-            , player->getPotionlList()[2]->getItemName().size());
-        DrawAt(startX + 4, startY + 4, L"3. " + wstr3 + L" : " + to_wstring(player->getPotionlList()[2]->getItemPrice()) + L" °ñµå");
-
-        DrawAt(startX + 4, startY + 5, L"4. ³ª°¡±â ");
+        DrawAt(startX, y, L"¦­");
+        DrawAt(endX, y, L"¦­");
     }
+    DrawAt(startX, endY, L"¦±" + std::wstring(endX - startX - 1, L'¦¬') + L"¦°");
+
+    if (!title.empty())
+    {
+        int titleX = startX + (endX - startX - title.length()) / 2 - 4;
+        DrawAt(titleX, startY, title);
+    }
+
+    for (int y = startY + 1; y < endY; y++)
+    {
+        DrawAt(startX + 1, y, std::wstring(endX - startX - 1, L' '));
+    }
+    Manager& manager = Manager::getInstance();
+
+    wstring wstr(player->getPotionlList()[0]->getItemName().size(), L'\0');
+    std::mbstowcs(&wstr[0], player->getPotionlList()[0]->getItemName().c_str()
+        , player->getPotionlList()[0]->getItemName().size());
+    DrawAt(startX + 4, startY + 2, L"1. " + wstr + L" : " + to_wstring(player->getPotionlList()[0]->getItemPrice()) + L" °ñµå");
+
+    wstring wstr2(player->getPotionlList()[1]->getItemName().size(), L'\0');
+    std::mbstowcs(&wstr2[0], player->getPotionlList()[1]->getItemName().c_str()
+        , player->getPotionlList()[1]->getItemName().size());
+    DrawAt(startX + 4, startY + 3, L"2. " + wstr2 + L" : " + to_wstring(player->getPotionlList()[1]->getItemPrice()) + L" °ñµå");
+
+    wstring wstr3(player->getPotionlList()[2]->getItemName().size(), L'\0');
+    std::mbstowcs(&wstr3[0], player->getPotionlList()[2]->getItemName().c_str()
+        , player->getPotionlList()[2]->getItemName().size());
+    DrawAt(startX + 4, startY + 4, L"3. " + wstr3 + L" : " + to_wstring(player->getPotionlList()[2]->getItemPrice()) + L" °ñµå");
+
+    DrawAt(startX + 4, startY + 5, L"4. ³ª°¡±â ");
+    
 }
 
 void ConsolePopup::DrawBuyComplete(int startX, int startY, int endX, int endY)
 {
+    DrawAt(startX, startY, L"¦®" + std::wstring(endX - startX - 1, L'¦¬') + L"¦¯");
+    for (int y = startY + 1; y < endY; y++)
     {
-        DrawAt(startX, startY, L"¦®" + std::wstring(endX - startX - 1, L'¦¬') + L"¦¯");
-        for (int y = startY + 1; y < endY; y++)
-        {
-            DrawAt(startX, y, L"¦­");
-            DrawAt(endX, y, L"¦­");
-        }
-        DrawAt(startX, endY, L"¦±" + std::wstring(endX - startX - 1, L'¦¬') + L"¦°");
-
-        for (int y = startY + 1; y < endY; y++)
-        {
-            DrawAt(startX + 1, y, std::wstring(endX - startX - 1, L' '));
-        }
-        Manager& manager = Manager::getInstance();
-        DrawAt(startX + 4, startY + 3, L"±¸¸Å¿Ï·á!");
+        DrawAt(startX, y, L"¦­");
+        DrawAt(endX, y, L"¦­");
     }
+    DrawAt(startX, endY, L"¦±" + std::wstring(endX - startX - 1, L'¦¬') + L"¦°");
+
+    for (int y = startY + 1; y < endY; y++)
+    {
+        DrawAt(startX + 1, y, std::wstring(endX - startX - 1, L' '));
+    }
+    Manager& manager = Manager::getInstance();
+    DrawAt(startX + 4, startY + 3, L"±¸¸Å¿Ï·á!");    
 }
 
 void ConsolePopup::DrawSkillShop(int startX, int startY, int endX, int endY, const std::wstring& title, Player* player)
 {
-    {
-
-        DrawAt(startX, startY, L"¦®" + std::wstring(endX - startX - 1, L'¦¬') + L"¦¯");
-        for (int y = startY + 1; y < endY; y++) {
-            DrawAt(startX, y, L"¦­");
-            DrawAt(endX, y, L"¦­");
-        }
-        DrawAt(startX, endY, L"¦±" + std::wstring(endX - startX - 1, L'¦¬') + L"¦°");
-
-        if (!title.empty()) {
-            int titleX = startX + (endX - startX - title.length()) / 2 - 4;
-            DrawAt(titleX, startY, title);
-        }
-
-        for (int y = startY + 1; y < endY; y++) {
-            DrawAt(startX + 1, y, std::wstring(endX - startX - 1, L' '));
-        }
-        Manager& manager = Manager::getInstance();
-
-        wstring wstr(player->getActiveSkillList()[0]->getSkillName().size(), L'\0');
-        std::mbstowcs(&wstr[0], player->getActiveSkillList()[0]->getSkillName().c_str()
-            , player->getActiveSkillList()[0]->getSkillName().size());
-        DrawAt(startX + 4, startY + 2, L"1. " + wstr + L" : " + to_wstring(/*player->getActiveSkillList()[0]->getSkillLevel() * */1000) + L" °ñµå");
-
-        wstring wstr2(player->getActiveSkillList()[1]->getSkillName().size(), L'\0');
-        std::mbstowcs(&wstr2[0], player->getActiveSkillList()[1]->getSkillName().c_str()
-            , player->getActiveSkillList()[1]->getSkillName().size());
-        DrawAt(startX + 4, startY + 3, L"2. " + wstr2 + L" : " + to_wstring(/*player->getActiveSkillList()[1]->getSkillLevel() * */5000) + L" °ñµå");
-
-        wstring wstr3(player->getActiveSkillList()[2]->getSkillName().size(), L'\0');
-        std::mbstowcs(&wstr3[0], player->getActiveSkillList()[2]->getSkillName().c_str()
-            , player->getActiveSkillList()[2]->getSkillName().size());
-        DrawAt(startX + 4, startY + 4, L"3. " + wstr3 + L" : " + to_wstring(/*player->getActiveSkillList()[1]->getSkillLevel() * */10000) + L" °ñµå");
-
-
-        DrawAt(startX + 4, startY + 5, L"4. ³ª°¡±â ");
+    DrawAt(startX, startY, L"¦®" + std::wstring(endX - startX - 1, L'¦¬') + L"¦¯");
+    for (int y = startY + 1; y < endY; y++) {
+        DrawAt(startX, y, L"¦­");
+        DrawAt(endX, y, L"¦­");
     }
+    DrawAt(startX, endY, L"¦±" + std::wstring(endX - startX - 1, L'¦¬') + L"¦°");
+    
+    if (!title.empty()) {
+        int titleX = startX + (endX - startX - title.length()) / 2 - 4;
+        DrawAt(titleX, startY, title);
+    }
+    
+    for (int y = startY + 1; y < endY; y++) {
+        DrawAt(startX + 1, y, std::wstring(endX - startX - 1, L' '));
+    }
+    Manager& manager = Manager::getInstance();
+    
+    wstring wstr(player->getActiveSkillList()[0]->getSkillName().size(), L'\0');
+    std::mbstowcs(&wstr[0], player->getActiveSkillList()[0]->getSkillName().c_str()
+        , player->getActiveSkillList()[0]->getSkillName().size());
+    DrawAt(startX + 4, startY + 2, L"1. " + wstr + L" : " + to_wstring(/*player->getActiveSkillList()[0]->getSkillLevel() * */1000) + L" °ñµå");
+    
+    wstring wstr2(player->getActiveSkillList()[1]->getSkillName().size(), L'\0');
+    std::mbstowcs(&wstr2[0], player->getActiveSkillList()[1]->getSkillName().c_str()
+        , player->getActiveSkillList()[1]->getSkillName().size());
+    DrawAt(startX + 4, startY + 3, L"2. " + wstr2 + L" : " + to_wstring(/*player->getActiveSkillList()[1]->getSkillLevel() * */5000) + L" °ñµå");
+    
+    wstring wstr3(player->getActiveSkillList()[2]->getSkillName().size(), L'\0');
+    std::mbstowcs(&wstr3[0], player->getActiveSkillList()[2]->getSkillName().c_str()
+        , player->getActiveSkillList()[2]->getSkillName().size());
+    DrawAt(startX + 4, startY + 4, L"3. " + wstr3 + L" : " + to_wstring(/*player->getActiveSkillList()[1]->getSkillLevel() * */10000) + L" °ñµå");
+    
+    DrawAt(startX + 4, startY + 5, L"4. ³ª°¡±â ");
 }
